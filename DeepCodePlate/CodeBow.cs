@@ -145,6 +145,8 @@ namespace CodingHood
 
         public RichTextBox RichTextBox { get { return richTextBox2; } }
 
+        private string ClipText = null;
+
         public CodeBow()
         {
             RefreshSnippets();
@@ -152,7 +154,7 @@ namespace CodingHood
             InitializeComponent();
             mHighlighter = new Highlighter(this);
             mTabHandler = new TabHandler(this);
-            //FldText = Clipboard.GetText();
+            ClipText = Clipboard.GetText();
             //richTextBox2.KeyDown
             //richTextBox2.PreviewKeyDown
             //richTextBox2.KeyDown += RichTextBox2_KeyDown;
@@ -167,6 +169,8 @@ namespace CodingHood
                     listBoxSelectionChangeHandling: (sel) => { PreviewSnippet(sel); },
                     handleChosenOne: (sel) => { SelectSnippet(sel); }
                 );
+
+            textBox1.Focus();
 
             FldText = "<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>\n<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>";
             //FldText = "<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>\r\n<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>";
@@ -505,5 +509,16 @@ namespace CodingHood
             //textBox1.Focus();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(richTextBox2.Text);
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(" ");
+            this.Close();
+        }
     }
 }
