@@ -430,6 +430,8 @@ namespace CodingHood
             Fields = new List<Field>();
             PartsBetween = new List<string>();
 
+            HandleSurroundContent();
+
             richTextBox1.Text = FldText;
             var starts = FldText.AllIndexesOf(FieldPlace.StartTag);
             var stops = FldText.AllIndexesOf(FieldPlace.EndTag);
@@ -473,7 +475,18 @@ namespace CodingHood
                 ind1++;
             }
             OutputText = sb.ToString();
+
             richTextBox2.Text = OutputText;
+        }
+
+        private void HandleSurroundContent()
+        {
+            string searchStr = FieldPlace.StartTag + "SurroundContent" + FieldPlace.EndTag;
+            if (ClipText != null &&
+                FldText.Contains(searchStr))
+            {
+                FldText = FldText.Replace(searchStr, ClipText);
+            }
         }
 
         private void AssembleText(out string newOrigTxt, out string newOutTxt)
