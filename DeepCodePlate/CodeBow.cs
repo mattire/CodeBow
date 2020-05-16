@@ -132,6 +132,9 @@ namespace CodingHood
 
 
         public List<Field> Fields { get; set; }
+
+        private SearchTxtMngr mSearchTxtMngr;
+
         public string FldText { get; set; }
         public string OutputText { get; set; }
 
@@ -157,7 +160,39 @@ namespace CodingHood
             richTextBox2.SelectionChanged += RichTextBox2_SelectionChanged;
             richTextBox2.KeyDown += RichTextBox2_KeyDown1;
             richTextBox1.KeyDown += RichTextBox1_KeyDown;
+
+
+            mSearchTxtMngr =
+                new SearchTxtMngr(textBox1, listBox1, Snippets,
+                    listBoxSelectionChangeHandling: (sel) => { PreviewSnippet(sel); },
+                    handleChosenOne: (sel) => { SelectSnippet(sel); }
+                );
+
             FldText = "<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>\n<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>";
+            //FldText = "<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>\r\n<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>";
+
+            ProcessText();
+        }
+
+        private string HandleLineFeeds(string txt) {
+            txt = txt.Replace("\n\r", "\n");
+            txt = txt.Replace("\r\n", "\n");
+            return txt;
+        }
+
+        private void SelectSnippet(string sel)
+        {
+            PreviewSnippet(sel);
+            textBox1.Text = sel;
+            richTextBox2.Focus();
+        }
+
+        private void PreviewSnippet(string sel)
+        {
+            var fn = sel + ".txt";
+            var path = Path.Combine(SnippetFld, fn);
+            var txt = File.ReadAllText(path);
+            FldText = HandleLineFeeds(txt);
             ProcessText();
         }
 
@@ -210,12 +245,14 @@ namespace CodingHood
             }
         }
 
+        List<char> specialChars = new List<char>() { '!', '"', '#', '¤', '%', '&', '/', '(', ')', '=', '?', '+', '´', '`', '@', '£', '$', '€', '{', '}', '[', ']', '\\', '^', '¨', '~', '*', '\'', ',', '.', ';', ':', '-', '_', ' ', '½', '§', '<', '>', '|' };
+
         private void RichTextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
 
             System.Diagnostics.Debug.WriteLine("KeyPress" + richTextBox2.SelectionLength);
             int selLen = SelectionLenghtOnKeyDown;
-            if (char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b')
+            if (char.IsLetterOrDigit(e.KeyChar) || e.KeyChar == '\b' || specialChars.Contains(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -468,12 +505,5 @@ namespace CodingHood
             //textBox1.Focus();
         }
 
-        private void SearchTextChanged(object sender, EventArgs e)
-        {
-            var search = textBox1.Text;
-            var results = Snippets.Where(t => t.Contains(search)).ToList();
-            listBox1.Items.Clear();
-            results.ForEach(s => { listBox1.Items.Add(s); });
-        }
     }
 }
