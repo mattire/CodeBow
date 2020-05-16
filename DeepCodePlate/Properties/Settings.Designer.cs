@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeepCodePlate.Properties
+namespace CodingHood.Properties
 {
 
 
