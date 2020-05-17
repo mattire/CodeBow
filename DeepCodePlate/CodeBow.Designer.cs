@@ -122,6 +122,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Name = "CodeBow";
             this.Text = "CodeBow";
+            this.Shown += new System.EventHandler(this.FormShown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

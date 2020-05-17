@@ -169,17 +169,20 @@ namespace CodingHood
             richTextBox1.KeyDown += RichTextBox1_KeyDown;
 
             mSearchTxtMngr =
-                new SearchTxtMngr(textBox1, listBox1, Snippets,
+                new 
+                SearchTxtMngr(textBox1, listBox1, Snippets,
                     listBoxSelectionChangeHandling: (sel) => { PreviewSnippet(sel); },
                     handleChosenOne: (sel) => { SelectSnippet(sel); }
                 );
 
-            textBox1.Focus();
+            //textBox1.Focus();
 
             FldText = "<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>\n<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>";
             //FldText = "<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>\r\n<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>";
 
             ProcessText();
+            //label2.Focus();
+            //textBox1.Select();
         }
 
         private string HandleLineFeeds(string txt) {
@@ -234,23 +237,7 @@ namespace CodingHood
         public bool HandleSelectionChanged { get; set; } = true;
         private void RichTextBox2_SelectionChanged(object sender, EventArgs e)
         {
-            if (HandleSelectionChanged)
-            {
-                System.Diagnostics.Debug.WriteLine("SelCha" + richTextBox2.SelectionLength);
-                var selStart = richTextBox2.SelectionStart;
-                FieldPlace fp;
-                int fieldsInd;
-                int fieldInd;
-                InsideFieldPlace2(selStart, out fp, out fieldInd, out fieldsInd);
-                HandleSelectionChanged = false;
 
-                mHighlighter.Unhighlight();
-                if (fp != null)
-                {
-                    mHighlighter.Highlight(fp);
-                }
-                HandleSelectionChanged = true;
-            }
         }
 
         List<char> specialChars = new List<char>() { '!', '"', '#', '¤', '%', '&', '/', '(', ')', '=', '?', '+', '´', '`', '@', '£', '$', '€', '{', '}', '[', ']', '\\', '^', '¨', '~', '*', '\'', ',', '.', ';', ':', '-', '_', ' ', '½', '§', '<', '>', '|' };
@@ -536,6 +523,11 @@ namespace CodingHood
         {
             Clipboard.SetText(" ");
             this.Close();
+        }
+
+        private void FormShown(object sender, EventArgs e)
+        {
+            textBox1.Select();
         }
     }
 }
