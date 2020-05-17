@@ -27,7 +27,7 @@ namespace CodingHood
         private const string SnippetFld = ".\\Snippets";
 
         public List<string> Snippets { get; set; }
-        
+
 
         private void RefreshSnippets()
         {
@@ -160,6 +160,7 @@ namespace CodingHood
 
             Current = this;
             InitializeComponent();
+            listBox2.Visible = false;
             mHighlighter = new Highlighter(this);
             mTabHandler = new TabHandler(this);
             ClipText = Clipboard.GetText();
@@ -197,6 +198,7 @@ namespace CodingHood
             PreviewSnippet(sel);
             textBox1.Text = sel;
             richTextBox2.Focus();
+            FieldHistoryMngr.Instance.LoadHistory();
         }
 
         private void PreviewSnippet(string sel)
@@ -219,17 +221,24 @@ namespace CodingHood
         int SelectionLenghtOnKeyDown = 0;
         private void RichTextBox2_KeyDown1(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Tab)
-            {
+            if (e.KeyCode == Keys.Tab) {
                 mTabHandler.NextFld();
                 e.Handled = true;
                 return;
             }
-            if (e.KeyCode == Keys.S && e.Alt)
-            {
-                //textBox1.Focus();
-                //textBox2.Select();
+            if (e.KeyCode == Keys.H && e.Control) {
+                SuggestionMngr.Instance.ShowSuggestions();
+                e.Handled = true;
             }
+            if (e.KeyCode == Keys.Escape) {
+                SuggestionMngr.Instance.HideSuggestions();
+                e.Handled = true;
+            }
+            //if (e.KeyCode == Keys.S && e.Alt)
+            //{
+            //    //textBox1.Focus();
+            //    //textBox2.Select();
+            //}
 
             System.Diagnostics.Debug.WriteLine("KeyDown" + richTextBox2.SelectionLength);
             SelectionLenghtOnKeyDown = richTextBox2.SelectionLength;
@@ -245,6 +254,7 @@ namespace CodingHood
 
         private void RichTextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (ModifierKeys.HasFlag(Keys.Control) && e.KeyChar == 'h') { e.Handled = true; return; }
 
             System.Diagnostics.Debug.WriteLine("KeyPress" + richTextBox2.SelectionLength);
             int selLen = SelectionLenghtOnKeyDown;
@@ -530,5 +540,20 @@ namespace CodingHood
         {
             textBox1.Select();
         }
+
+        public string CurrentScript { get { return textBox1.Text; } }
+
+        public FieldPlace CurrentFieldPlace {
+            get {
+                var pos = richTextBox2.SelectionStart;
+                var fp = FieldPlaces.FirstOrDefault(fp1 => fp1.OutPutTextStart <= pos && pos <= fp1.OutPutTextEnd);
+                return fp;
+            }
+        }
+
+        public ListBox SuggestBox {
+            get {
+                return this.listBox2;
+            } }
     }
 }
