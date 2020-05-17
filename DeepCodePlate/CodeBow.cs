@@ -172,7 +172,8 @@ namespace CodingHood
                 new 
                 SearchTxtMngr(textBox1, listBox1, Snippets,
                     listBoxSelectionChangeHandling: (sel) => { PreviewSnippet(sel); },
-                    handleChosenOne: (sel) => { SelectSnippet(sel); }
+                    handleChosenOne: (sel) => {
+                        SelectSnippet(sel); }
                 );
 
             //textBox1.Focus();

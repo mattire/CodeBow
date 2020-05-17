@@ -60,15 +60,24 @@ namespace CodingHood
                     e.Handled = true;
                 }
             }
-            if (ind == -1) return;
+            if (ind != -1) {
+                ListBox.SelectedIndex = ind;
+            };
 
-            ListBox.SelectedIndex = ind;
 
             if (e.KeyCode == Keys.Enter)
             {
+                string sel=null;
                 if (ListBox.SelectedItem != null)
                 {
-                    var sel = ListBox.SelectedItem.ToString();
+                    sel = ListBox.SelectedItem.ToString();
+                }
+                else {
+                    if (ListBox.Items.Count > 0) {
+                        sel = ListBox.Items[0].ToString();
+                    }
+                }
+                if (sel != null) {
                     System.Diagnostics.Debug.WriteLine(sel);
                     ListBox.Visible = false;
 
