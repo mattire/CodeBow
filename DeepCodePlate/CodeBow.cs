@@ -50,7 +50,8 @@ namespace CodingHood
 
         public class Field
         {
-            public string Name { get; set; }
+            private string name;
+            public string Name { get { return name; } set { name = value; } }
             public string Value { get; set; }
         }
 
@@ -67,7 +68,7 @@ namespace CodingHood
                 OutPutTextEnd = FldOuterEnd - (Order + 1) * (StartTag.Length + EndTag.Length);
                 FldName = fldText.Substring(FldInnerStart, FldInnerEnd - FldInnerStart);
                 // initial value is fld name
-                FldValue = FldName;
+                FldValue = (string)FldName.Clone();
             }
 
             public static string StartTag { get; set; } = "#*";
@@ -84,7 +85,9 @@ namespace CodingHood
 
             public string FldName { get; set; }
 
-            public string fldValue { get; set; }
+            public string OrigFldName { get; set; }
+
+            private string fldValue { get; set; }
             public string FldValue
             {
                 get { return fldValue; }
@@ -208,6 +211,7 @@ namespace CodingHood
             var txt = File.ReadAllText(path);
             FldText = HandleLineFeeds(txt);
             ProcessText();
+            OriginalFields = Fields.Select(f => new Field() { Name = f.Name, Value = f.Value }).ToList();
         }
 
         private void RichTextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -226,14 +230,26 @@ namespace CodingHood
                 e.Handled = true;
                 return;
             }
+            var sgstMngr = SuggestionMngr.Instance;
             if (e.KeyCode == Keys.H && e.Control) {
-                SuggestionMngr.Instance.ShowSuggestions();
+                sgstMngr.ShowSuggestions();
                 e.Handled = true;
             }
             if (e.KeyCode == Keys.Escape) {
-                SuggestionMngr.Instance.HideSuggestions();
+                sgstMngr.HideSuggestions();
                 e.Handled = true;
             }
+            if (SuggestBox.Visible == true) {
+                if (e.KeyCode == Keys.Up) {
+                    sgstMngr.HandleUpKey();
+                    e.Handled = true;
+                }
+                if (e.KeyCode == Keys.Down) {
+                    sgstMngr.HandleDownKey();
+                    e.Handled = true;
+                }
+            }
+
             //if (e.KeyCode == Keys.S && e.Alt)
             //{
             //    //textBox1.Focus();
@@ -555,5 +571,7 @@ namespace CodingHood
             get {
                 return this.listBox2;
             } }
+
+        public List<Field> OriginalFields { get; private set; }
     }
 }
