@@ -54,7 +54,7 @@
     <Compile Include="CodeBow.Designer.cs">
       <DependentUpon>CodeBow.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeepRichTextBox.cs">
+    <Compile Include="CodeRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />

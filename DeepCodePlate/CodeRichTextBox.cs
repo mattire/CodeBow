@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CodingHood
 {
-    class DeepRichTextBox : RichTextBox
+    class CodeRichTextBox : RichTextBox
     {
         protected override bool IsInputKey(Keys keyData)
         {

@@ -97,6 +97,11 @@ namespace CodingHood
 
             public int Order { get; set; }
 
+            internal void Select()
+            {
+                var box = (CodeRichTextBox)CodeBow.Current.RichTextBox;
+                box.Select(this.OutPutTextStart, OutLength);
+            }
         }
 
         public class OutPlace
@@ -147,22 +152,21 @@ namespace CodingHood
 
         private string ClipText = null;
 
+        public static CodeBow Current;
+
         public CodeBow()
         {
             RefreshSnippets();
 
+            Current = this;
             InitializeComponent();
             mHighlighter = new Highlighter(this);
             mTabHandler = new TabHandler(this);
             ClipText = Clipboard.GetText();
-            //richTextBox2.KeyDown
-            //richTextBox2.PreviewKeyDown
-            //richTextBox2.KeyDown += RichTextBox2_KeyDown;
             richTextBox2.KeyPress += RichTextBox2_KeyPress;
             richTextBox2.SelectionChanged += RichTextBox2_SelectionChanged;
             richTextBox2.KeyDown += RichTextBox2_KeyDown1;
             richTextBox1.KeyDown += RichTextBox1_KeyDown;
-
 
             mSearchTxtMngr =
                 new SearchTxtMngr(textBox1, listBox1, Snippets,
@@ -213,7 +217,7 @@ namespace CodingHood
         {
             if (e.KeyCode == Keys.Tab)
             {
-                mTabHandler.Next();
+                mTabHandler.NextFld();
                 e.Handled = true;
                 return;
             }
