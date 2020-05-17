@@ -34,11 +34,11 @@ namespace CodingHood
             if (fp != null) {
                 FieldHistoryMngr mngr = FieldHistoryMngr.Instance;
 
-                bow.OriginalFields.ForEach(f =>
-                {
-                    System.Diagnostics.Debug.WriteLine(f.Name);
-                    System.Diagnostics.Debug.WriteLine(f.Value);
-                });
+                //bow.OriginalFields.ForEach(f =>
+                //{
+                //    System.Diagnostics.Debug.WriteLine(f.Name);
+                //    System.Diagnostics.Debug.WriteLine(f.Value);
+                //});
 
                 var fld = bow.Fields.FirstOrDefault(f => f.Name == fp.FldName);
                 var ind = bow.Fields.IndexOf(fld);
