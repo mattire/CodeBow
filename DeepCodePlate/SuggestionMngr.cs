@@ -29,9 +29,10 @@ namespace CodingHood
         internal void ShowSuggestions()
         {
             var bow = CodeBow.Current;
-            var fp = bow.CurrentFieldPlace;
+            mFldPlace = bow.CurrentFieldPlace;
+            StoreFldInd();
             ind = -1;
-            if (fp != null) {
+            if (mFldPlace != null) {
                 FieldHistoryMngr mngr = FieldHistoryMngr.Instance;
 
                 //bow.OriginalFields.ForEach(f =>
@@ -40,7 +41,7 @@ namespace CodingHood
                 //    System.Diagnostics.Debug.WriteLine(f.Value);
                 //});
 
-                var fld = bow.Fields.FirstOrDefault(f => f.Name == fp.FldName);
+                var fld = bow.Fields.FirstOrDefault(f => f.Name == mFldPlace.FldName);
                 var ind = bow.Fields.IndexOf(fld);
                 var lst = mngr.SuggestionMap.ElementAt(ind).Value;
 
@@ -58,7 +59,16 @@ namespace CodingHood
             }
         }
 
+        private void StoreFldInd()
+        {
+            var bow = CodeBow.Current;
+            var fld = bow.Fields.FirstOrDefault(fld1 => fld1.Name == mFldPlace.FldName);
+            mFldInd = bow.Fields.IndexOf(fld);
+        }
+
+        private CodeBow.FieldPlace mFldPlace;
         private int ind = -1;
+        private int mFldInd;
 
         internal void HideSuggestions() {
             SuggestBox.Visible = false;
@@ -66,7 +76,7 @@ namespace CodingHood
 
         internal void HandleUpKey() {
             int count = SuggestBox.Items.Count;
-            if (ind == -1) { ind = count; } else if (ind > 0) { ind--; } else { ind = count - 1; }
+            if (ind == -1) { ind = count-1; } else if (ind > 0) { ind--; } else { ind = count - 1; }
             SuggestBox.SelectedIndex = ind;
         }
 
@@ -74,6 +84,17 @@ namespace CodingHood
             int count = SuggestBox.Items.Count;
             if (ind == -1) { ind = 0; } else if (ind < count - 1) { ind++; } else { ind = 0; }
             SuggestBox.SelectedIndex = ind;
+        }
+
+        internal void HandleEnterKey()
+        {
+            var item = (string)SuggestBox.SelectedItem;
+            //CodeBow.Current.CurrentFieldPlace.FldValue = item;
+            var bow = CodeBow.Current;
+            bow.Process(mFldPlace, item, mFldInd);
+            bow.RewriteFieldPlaces();
+            bow.RichTextBox.Select(mFldPlace.OutPutTextStart, mFldPlace.OutLength);
+            SuggestBox.Visible = false;
         }
     }
 }

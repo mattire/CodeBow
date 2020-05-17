@@ -232,20 +232,27 @@ namespace CodingHood
             }
             var sgstMngr = SuggestionMngr.Instance;
             if (e.KeyCode == Keys.H && e.Control) {
+                var fp = CurrentFieldPlace;
                 sgstMngr.ShowSuggestions();
                 e.Handled = true;
             }
-            if (e.KeyCode == Keys.Escape) {
-                sgstMngr.HideSuggestions();
-                e.Handled = true;
-            }
-            if (SuggestBox.Visible == true) {
+            if (SuggestBox.Visible == true)
+            {
+                if (e.KeyCode == Keys.Escape) {
+                    sgstMngr.HideSuggestions();
+                    e.Handled = true;
+                }
                 if (e.KeyCode == Keys.Up) {
                     sgstMngr.HandleUpKey();
                     e.Handled = true;
                 }
                 if (e.KeyCode == Keys.Down) {
                     sgstMngr.HandleDownKey();
+                    e.Handled = true;
+                }
+                if (e.KeyCode == Keys.Enter)
+                {
+                    sgstMngr.HandleEnterKey();
                     e.Handled = true;
                 }
             }
@@ -271,6 +278,15 @@ namespace CodingHood
         private void RichTextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (ModifierKeys.HasFlag(Keys.Control) && e.KeyChar == 'h') { e.Handled = true; return; }
+
+            var sgstMngr = SuggestionMngr.Instance;
+            if (sgstMngr.SuggestBox.Visible) {
+                //System.Diagnostics.Debug.WriteLine(e.KeyChar=='\r');
+                if(e.KeyChar == '\r' || e.KeyChar == '\n'){
+                    sgstMngr.HandleEnterKey();
+                    e.Handled = true;
+                }
+            }
 
             System.Diagnostics.Debug.WriteLine("KeyPress" + richTextBox2.SelectionLength);
             int selLen = SelectionLenghtOnKeyDown;
@@ -324,7 +340,7 @@ namespace CodingHood
             //throw new NotImplementedException();
         }
 
-        private void RewriteFieldPlaces()
+        public void RewriteFieldPlaces()
         {
             string newOrigTxt;
             string newOutTxt;
@@ -373,6 +389,14 @@ namespace CodingHood
             fld.Value = value;
             // Write to all FieldPlaces
             FieldPlaces.Where(fpl => fpl.FldName == fld.Name).ToList().ForEach(fpl => fpl.FldValue = value);
+        }
+
+        public void Process(FieldPlace fp, string newVal, int fldInd) {
+            fp.FldValue = newVal;
+            var fld = Fields.ElementAt(fldInd);
+            //var fld = Fields.FirstOrDefault(f => f.Name == fp.FldName);
+            fld.Value = newVal;
+            FieldPlaces.Where(fpl => fpl.FldName == fld.Name).ToList().ForEach(fpl => fpl.FldValue = newVal);
         }
 
         private void RichTextBox2_KeyDown(object sender, KeyEventArgs e)
