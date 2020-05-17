@@ -285,6 +285,7 @@ namespace CodingHood
                 if(e.KeyChar == '\r' || e.KeyChar == '\n'){
                     sgstMngr.HandleEnterKey();
                     e.Handled = true;
+                    return;
                 }
             }
 
