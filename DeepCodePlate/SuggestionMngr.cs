@@ -25,7 +25,8 @@ namespace CodingHood
             }
         }
 
-        public ListBox SuggestBox { get {
+        public ListBox SuggestBox {
+            get {
                 return CodeBow.Current.SuggestBox;
             }
         }
