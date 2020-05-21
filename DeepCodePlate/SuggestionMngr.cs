@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace CodingHood
 {
+    // When starting to type, autoshow suggestions, if there is suggestion matches 
+    // Esc hide suggestions, ctrl + space, reshow suggestions
+    // Ctrl + h, show entries in history
+
     class SuggestionMngr
     {
         private static SuggestionMngr instance;
@@ -88,6 +92,7 @@ namespace CodingHood
 
         internal void HandleEnterKey()
         {
+            
             var item = (string)SuggestBox.SelectedItem;
             //CodeBow.Current.CurrentFieldPlace.FldValue = item;
             var bow = CodeBow.Current;

@@ -4,62 +4,74 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CodingHood
 {
     public class Highlighter
     {
-        private CodeBow mRewrite;
+        private CodeBow mCodeBow;
+        private RichTextBox mRichTextBox;
 
-        public Highlighter(CodeBow rewrite)
+        public Highlighter(CodeBow codeBow)
         {
-            this.mRewrite = rewrite;
+            this.mCodeBow = codeBow;
+            mRichTextBox = mCodeBow.RichTextBox;
+            //mCodeBow.RichTextBox.SelectionChanged += RichTextBox_SelectionChanged;
+        }
+
+        private void RichTextBox_SelectionChanged(object sender, EventArgs e)
+        {
+            var pos = mRichTextBox.SelectionStart;
+            Unhighlight();
+            var fldPlace = mCodeBow.FieldPlaces.FirstOrDefault(fp => fp.FldOuterStart >= pos && pos <= fp.FldOuterEnd);
+            if (fldPlace != null) { Highlight(fldPlace); }
         }
 
         internal void Highlight(CodeBow.FieldPlace fpl)
         {
-            var selCol = mRewrite.RichTextBox.SelectionColor;
-            var selStart = mRewrite.RichTextBox.SelectionStart;
-            var selLen = mRewrite.RichTextBox.SelectionLength;
+            var selCol = mCodeBow.RichTextBox.SelectionColor;
+            var selStart = mCodeBow.RichTextBox.SelectionStart;
+            var selLen = mCodeBow.RichTextBox.SelectionLength;
 
-            mRewrite.RichTextBox.SelectionColor = Color.LightGray;
+            mCodeBow.RichTextBox.SelectionColor = Color.LightGray;
 
-            mRewrite.FieldPlaces.Where(fp1 => fp1.FldName == fpl.FldName).ToList().ForEach(fp =>
+            mCodeBow.FieldPlaces.Where(fp1 => fp1.FldName == fpl.FldName).ToList().ForEach(fp =>
             {
                 int len = fp.OutPutTextEnd - fp.OutPutTextStart;
-                mRewrite.RichTextBox.Select(fp.OutPutTextStart, len);
-                //mRewrite.RichTextBox.SelectionBackColor = Color.LightSalmon;
-                //mRewrite.RichTextBox.SelectionBackColor = Color.LightGoldenrodYellow;
-                mRewrite.RichTextBox.SelectionBackColor = Color.LightGray;
+                mCodeBow.RichTextBox.Select(fp.OutPutTextStart, len);
+                //mCodeBow.RichTextBox.SelectionBackColor = Color.LightSalmon;
+                //mCodeBow.RichTextBox.SelectionBackColor = Color.LightGoldenrodYellow;
+                mCodeBow.RichTextBox.SelectionBackColor = Color.LightGray;
             });
-            //mRewrite.RichTextBox
+            //mCodeBow.RichTextBox
 
-            mRewrite.RichTextBox.SelectionStart = selStart;
-            mRewrite.RichTextBox.SelectionLength = selLen;
-            mRewrite.RichTextBox.SelectionColor = selCol;
+            mCodeBow.RichTextBox.SelectionStart = selStart;
+            mCodeBow.RichTextBox.SelectionLength = selLen;
+            mCodeBow.RichTextBox.SelectionColor = selCol;
         }
 
         internal void Unhighlight()
         {
-            var selCol = mRewrite.RichTextBox.SelectionColor;
-            var selStart = mRewrite.RichTextBox.SelectionStart;
-            var selLen = mRewrite.RichTextBox.SelectionLength;
+            var selCol = mCodeBow.RichTextBox.SelectionColor;
+            var selStart = mCodeBow.RichTextBox.SelectionStart;
+            var selLen = mCodeBow.RichTextBox.SelectionLength;
 
-            mRewrite.RichTextBox.SelectionColor = Color.White;
+            mCodeBow.RichTextBox.SelectionColor = Color.White;
 
-            mRewrite.FieldPlaces.ForEach(fp =>
+            mCodeBow.FieldPlaces.ForEach(fp =>
             {
                 int len = fp.OutPutTextEnd - fp.OutPutTextStart;
-                mRewrite.RichTextBox.Select(fp.OutPutTextStart, len);
-                //mRewrite.RichTextBox.SelectionBackColor = Color.LightSalmon;
-                //mRewrite.RichTextBox.SelectionBackColor = Color.LightGoldenrodYellow;
-                mRewrite.RichTextBox.SelectionBackColor = Color.White;
+                mCodeBow.RichTextBox.Select(fp.OutPutTextStart, len);
+                //mCodeBow.RichTextBox.SelectionBackColor = Color.LightSalmon;
+                //mCodeBow.RichTextBox.SelectionBackColor = Color.LightGoldenrodYellow;
+                mCodeBow.RichTextBox.SelectionBackColor = Color.White;
             });
-            //mRewrite.RichTextBox
+            //mCodeBow.RichTextBox
 
-            mRewrite.RichTextBox.SelectionStart = selStart;
-            mRewrite.RichTextBox.SelectionLength = selLen;
-            mRewrite.RichTextBox.SelectionColor = selCol;
+            mCodeBow.RichTextBox.SelectionStart = selStart;
+            mCodeBow.RichTextBox.SelectionLength = selLen;
+            mCodeBow.RichTextBox.SelectionColor = selCol;
         }
     }
 }

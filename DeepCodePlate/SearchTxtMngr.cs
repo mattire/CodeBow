@@ -40,7 +40,7 @@ namespace CodingHood
         {
             //textBox1.TextChanged
             var search = TextBox.Text;
-            var results = Snippets.Where(t => t.Contains(search)).ToList();
+            var results = Snippets.Where(t => t.ToUpper().Contains(search.ToUpper())).ToList();
             ListBox.Items.Clear();
             results.ForEach(s => { ListBox.Items.Add(s); });
         }
