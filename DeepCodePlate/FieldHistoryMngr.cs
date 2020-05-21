@@ -34,13 +34,6 @@ namespace CodingHood
             }
         }
 
-        //public static FieldHistoryMngr Current;
-        //
-        //public FieldHistoryMngr()
-        //{
-        //    Current = this;
-        //}
-
         public void LoadHistory() {
             if(!string.IsNullOrWhiteSpace(CurrentScriptName))
             {
@@ -49,15 +42,43 @@ namespace CodingHood
             }
         }
 
-        public void StoreValues() {
-            foreach (var fld in CodeBow.Current.Fields) {
-                var lst = SuggestionMap[fld.Name];
-                lst.Insert(0, fld.Name);
-                if (lst.Count > HistoryLimitCount) {
-                    lst.RemoveAt(lst.Count - 1);
+        private string GetOriginalFieldName(CodeBow.Field fieldPlace)
+        {
+            var bow = CodeBow.Current;
+            var ind = bow.Fields.IndexOf(fieldPlace);
+            if (ind != -1) {
+                return bow.OriginalFields[ind].Name;
+            }
+            return "";
+        }
+
+        public void StoreValues()
+        {
+            foreach (var fld in CodeBow.Current.Fields)
+            {
+                var fn = GetOriginalFieldName(fld);
+                if (SuggestionMap.ContainsKey(fn)) {
+                    var lst = SuggestionMap[fn];
+                    HandleInsert(lst, fld);
+                    //lst.Insert(0, fld.Name);
+                    //if (lst.Count > HistoryLimitCount) {
+                    //    lst.RemoveAt(lst.Count - 1);
+                    //}
                 }
             }
             SaveSuggestionMap();
+        }
+
+        private void HandleInsert(List<string> lst, CodeBow.Field fld)
+        {
+            lst.Remove(fld.Value); // remove if exists
+            
+            //lst.Insert(0, fld.Name);
+            lst.Insert(0, fld.Value);
+            if (lst.Count > HistoryLimitCount)
+            {
+                lst.RemoveAt(lst.Count - 1);
+            }
         }
 
         private void SaveSuggestionMap()
@@ -65,7 +86,9 @@ namespace CodingHood
             foreach (var kvp in SuggestionMap)
             {
                 var content = string.Join("\n", kvp.Value);
-                var path = Path.Combine(HistoryFolderName, kvp.Key);
+                //var path = Path.Combine(HistoryFolderName, kvp.Key);
+                var path = Path.Combine(mFolderPath, kvp.Key);
+                
                 File.WriteAllText(path, content);
             }
         }

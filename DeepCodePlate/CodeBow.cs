@@ -571,9 +571,10 @@ namespace CodingHood
             //textBox1.Focus();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Ok_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(richTextBox2.Text);
+            FieldHistoryMngr.Instance.StoreValues();
             this.Close();
         }
 
@@ -604,5 +605,19 @@ namespace CodingHood
             } }
 
         public List<Field> OriginalFields { get; private set; }
+        public TabHandler MTabHandler { get => mTabHandler; set => mTabHandler = value; }
+
+        public string GetOriginalFieldName(FieldPlace fieldPlace)
+        {
+            var fld = Fields.FirstOrDefault(f => f.Name == fieldPlace.FldName);
+            
+            var ind = Fields.IndexOf(fld);
+            if (ind != -1)
+            {
+                return OriginalFields[ind].Name;
+            }
+            return "";
+        }
+
     }
 }

@@ -84,18 +84,9 @@ namespace CodingHood
 
                     handleChosen(sel);
                     e.Handled = true;
+                    CodeBow.Current.MTabHandler.SelectFirstFld();
                 }
             }
-        }
-
-        private void ListBoxSelectNext()
-        {
-            //ListBox.SelectedIndex
-            //ListBox.Items.Count
-        }
-
-        private void ListBoxSelectPrevious()
-        {
         }
 
         public TextBox TextBox { get; }
