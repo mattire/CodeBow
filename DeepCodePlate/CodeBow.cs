@@ -605,6 +605,7 @@ namespace CodingHood
             } }
 
         public List<Field> OriginalFields { get; private set; }
+        public TabHandler MTabHandler { get => mTabHandler; set => mTabHandler = value; }
 
         public string GetOriginalFieldName(FieldPlace fieldPlace)
         {

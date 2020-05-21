@@ -84,6 +84,7 @@ namespace CodingHood
 
                     handleChosen(sel);
                     e.Handled = true;
+                    CodeBow.Current.MTabHandler.SelectFirstFld();
                 }
             }
         }

@@ -81,9 +81,12 @@ namespace CodingHood
 
 
         public void SelectCurrentFld() {
-            var fld = mCodeBow.Fields[mTabFieldInd];
-            var fldPlace = mCodeBow.FieldPlaces.FirstOrDefault(fp => fp.FldName == fld.Name);
-            mCodeBow.RichTextBox.Select(fldPlace.FldOuterStart, fldPlace.OutLength);
+            if (mCodeBow.Fields.Count > 0) {
+                var fld = mCodeBow.Fields[mTabFieldInd];
+                if (fld == null) { return; }
+                var fldPlace = mCodeBow.FieldPlaces.FirstOrDefault(fp => fp.FldName == fld.Name);
+                mCodeBow.RichTextBox.Select(fldPlace.FldOuterStart, fldPlace.OutLength);
+            }
         }
 
         public void SelectFirstFld() {
