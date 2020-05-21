@@ -20,12 +20,16 @@ namespace CodingHood
             //mCodeBow.RichTextBox.SelectionChanged += RichTextBox_SelectionChanged;
         }
 
+        bool handling = false;
         private void RichTextBox_SelectionChanged(object sender, EventArgs e)
         {
+            if (handling) { return; }
+            handling = true;
             var pos = mRichTextBox.SelectionStart;
             Unhighlight();
             var fldPlace = mCodeBow.FieldPlaces.FirstOrDefault(fp => fp.FldOuterStart >= pos && pos <= fp.FldOuterEnd);
             if (fldPlace != null) { Highlight(fldPlace); }
+            handling = false;
         }
 
         internal void Highlight(CodeBow.FieldPlace fpl)

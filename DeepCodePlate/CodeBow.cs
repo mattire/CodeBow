@@ -332,10 +332,13 @@ namespace CodingHood
                     RewriteFieldPlaces();
                     if (e.KeyChar != '\b')
                     {
-                        richTextBox2.SelectionStart = selStart + fieldInd + 1;
+                        //richTextBox2.SelectionStart = selStart + fieldInd + 1;
+                        richTextBox2.SelectionStart = selStart - fieldInd * (selLen - 1) + 1;
                     }
                     else
-                    { richTextBox2.SelectionStart = selStart - fieldInd * selLen; }
+                    {
+                        richTextBox2.SelectionStart = selStart - fieldInd * selLen;
+                    }
                 }
             }
             //throw new NotImplementedException();
