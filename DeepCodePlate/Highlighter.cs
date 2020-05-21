@@ -17,7 +17,8 @@ namespace CodingHood
         {
             this.mCodeBow = codeBow;
             mRichTextBox = mCodeBow.RichTextBox;
-            //mCodeBow.RichTextBox.SelectionChanged += RichTextBox_SelectionChanged;
+            mCodeBow.RichTextBox.SelectionChanged += RichTextBox_SelectionChanged;
+            //mCodeBow.ProcessAndRewriteDone += (s, e) => { RichTextBox_SelectionChanged(s,e); };
         }
 
         bool handling = false;
@@ -27,7 +28,9 @@ namespace CodingHood
             handling = true;
             var pos = mRichTextBox.SelectionStart;
             Unhighlight();
-            var fldPlace = mCodeBow.FieldPlaces.FirstOrDefault(fp => fp.FldOuterStart >= pos && pos <= fp.FldOuterEnd);
+            var fldPlace = mCodeBow.FieldPlaces.FirstOrDefault(fp => 
+                                    pos >= fp.OutPutTextStart && 
+                                    pos <= fp.OutPutTextEnd);
             if (fldPlace != null) { Highlight(fldPlace); }
             handling = false;
         }

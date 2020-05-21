@@ -311,6 +311,7 @@ namespace CodingHood
                 {
                     Process(fp, selStart, e.KeyChar, richTextBox2.Text);
                     RewriteFieldPlaces();
+                    
 
                     if (e.KeyChar != '\b')
                     {
@@ -330,6 +331,8 @@ namespace CodingHood
                 {
                     Process(fp, selStart, selLen, e.KeyChar, richTextBox2.Text);
                     RewriteFieldPlaces();
+                    
+
                     if (e.KeyChar != '\b')
                     {
                         //richTextBox2.SelectionStart = selStart + fieldInd + 1;
