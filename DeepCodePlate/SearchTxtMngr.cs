@@ -61,6 +61,7 @@ namespace CodingHood
                 }
             }
             if (ind != -1) {
+                if (ind > ListBox.Items.Count - 1) { ind = ListBox.Items.Count - 1; }
                 ListBox.SelectedIndex = ind;
             };
 
