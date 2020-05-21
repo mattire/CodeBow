@@ -40,15 +40,15 @@ namespace CodingHood
             if (mFldPlace != null) {
                 FieldHistoryMngr mngr = FieldHistoryMngr.Instance;
 
-                //bow.OriginalFields.ForEach(f =>
-                //{
-                //    System.Diagnostics.Debug.WriteLine(f.Name);
-                //    System.Diagnostics.Debug.WriteLine(f.Value);
-                //});
+                var origName = CodeBow.Current.GetOriginalFieldName(mFldPlace);
 
-                var fld = bow.Fields.FirstOrDefault(f => f.Name == mFldPlace.FldName);
-                var ind = bow.Fields.IndexOf(fld);
-                var lst = mngr.SuggestionMap.ElementAt(ind).Value;
+                //var fld = bow.Fields.FirstOrDefault(f => f.Name == mFldPlace.FldName);
+                //var ind = bow.Fields.IndexOf(fld);
+                List<string> entries = new List<string>();
+                if (mngr.SuggestionMap.ContainsKey(origName)) {
+                     entries=  mngr.SuggestionMap[origName];
+                }
+                //var lst = mngr.SuggestionMap.ElementAt(ind).Value;
 
                 //var lst = mngr.SuggestionMap[fp.FldName];
                 var rtb = bow.RichTextBox;
@@ -57,7 +57,8 @@ namespace CodingHood
                 var offset = new Point() { X = 5, Y = 18 };
                 var p1 = Utils.Add(/*this.Location,*/ rtb.Location, selPos, offset);
 
-                lst.ForEach(s => SuggestBox.Items.Add(s));
+                SuggestBox.Items.Clear();
+                entries.ForEach(s => SuggestBox.Items.Add(s));
 
                 SuggestBox.Location = p1;
                 SuggestBox.Visible = true;

@@ -605,5 +605,18 @@ namespace CodingHood
             } }
 
         public List<Field> OriginalFields { get; private set; }
+
+        public string GetOriginalFieldName(FieldPlace fieldPlace)
+        {
+            var fld = Fields.FirstOrDefault(f => f.Name == fieldPlace.FldName);
+            
+            var ind = Fields.IndexOf(fld);
+            if (ind != -1)
+            {
+                return OriginalFields[ind].Name;
+            }
+            return "";
+        }
+
     }
 }
