@@ -59,13 +59,26 @@ namespace CodingHood
                 var fn = GetOriginalFieldName(fld);
                 if (SuggestionMap.ContainsKey(fn)) {
                     var lst = SuggestionMap[fn];
-                    lst.Insert(0, fld.Name);
-                    if (lst.Count > HistoryLimitCount) {
-                        lst.RemoveAt(lst.Count - 1);
-                    }
+                    HandleInsert(lst, fld);
+                    //lst.Insert(0, fld.Name);
+                    //if (lst.Count > HistoryLimitCount) {
+                    //    lst.RemoveAt(lst.Count - 1);
+                    //}
                 }
             }
             SaveSuggestionMap();
+        }
+
+        private void HandleInsert(List<string> lst, CodeBow.Field fld)
+        {
+            lst.Remove(fld.Value); // remove if exists
+            
+            //lst.Insert(0, fld.Name);
+            lst.Insert(0, fld.Value);
+            if (lst.Count > HistoryLimitCount)
+            {
+                lst.RemoveAt(lst.Count - 1);
+            }
         }
 
         private void SaveSuggestionMap()

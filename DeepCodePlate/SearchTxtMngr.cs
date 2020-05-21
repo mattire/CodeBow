@@ -89,16 +89,6 @@ namespace CodingHood
             }
         }
 
-        private void ListBoxSelectNext()
-        {
-            //ListBox.SelectedIndex
-            //ListBox.Items.Count
-        }
-
-        private void ListBoxSelectPrevious()
-        {
-        }
-
         public TextBox TextBox { get; }
         public ListBox ListBox { get; }
         public List<string> Snippets { get; }
