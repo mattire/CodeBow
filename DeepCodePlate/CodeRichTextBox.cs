@@ -70,5 +70,7 @@ namespace CodingHood
 
         }
 
+        // WPF highlighting https://stackoverflow.com/questions/11186154/rich-text-box-how-to-highlight-text-block-without-select
+
     }
 }
