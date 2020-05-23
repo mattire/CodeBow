@@ -28,6 +28,7 @@ namespace CodingHood
 
         public List<string> Snippets { get; set; }
 
+        private bool SnippetInited { get; set; }
 
         private void RefreshSnippets()
         {
@@ -91,7 +92,16 @@ namespace CodingHood
             public string FldValue
             {
                 get { return fldValue; }
-                set { fldValue = value; }
+                set {
+                    fldValue = value;
+                    if (CodeBow.Current.SnippetInited) {
+                        if (CodeBow.Current.CurrentFieldPlace == this) {
+                            if (fldValue.Length >= 3) {                            
+                                SuggestionMngr.Instance.CheckHistoryEntries(this);
+                            }
+                        }
+                    }
+                }
             }
             public string TagName { get { return StartTag + FldName + EndTag; } }
             public string TagValue { get { return StartTag + FldValue + EndTag; } }
@@ -159,6 +169,7 @@ namespace CodingHood
 
         public CodeBow()
         {
+            SnippetInited = false;
             RefreshSnippets();
 
             Current = this;
@@ -202,6 +213,7 @@ namespace CodingHood
             textBox1.Text = sel;
             richTextBox2.Focus();
             FieldHistoryMngr.Instance.LoadHistory();
+            SnippetInited = true;
         }
 
         private void PreviewSnippet(string sel)
@@ -287,6 +299,11 @@ namespace CodingHood
                     e.Handled = true;
                     return;
                 }
+            }
+
+            if (e.KeyChar == '\u001b') {
+                e.Handled= true;
+                return;
             }
 
             System.Diagnostics.Debug.WriteLine("KeyPress" + richTextBox2.SelectionLength);
@@ -617,6 +634,11 @@ namespace CodingHood
                 return OriginalFields[ind].Name;
             }
             return "";
+        }
+
+        private void SearchEntered(object sender, EventArgs e)
+        {
+            SnippetInited = false;
         }
 
     }

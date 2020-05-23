@@ -31,7 +31,7 @@ namespace CodingHood
             }
         }
 
-        internal void ShowSuggestions()
+        internal void ShowSuggestions(List<string> matches =null)
         {
             var bow = CodeBow.Current;
             mFldPlace = bow.CurrentFieldPlace;
@@ -45,8 +45,11 @@ namespace CodingHood
                 //var fld = bow.Fields.FirstOrDefault(f => f.Name == mFldPlace.FldName);
                 //var ind = bow.Fields.IndexOf(fld);
                 List<string> entries = new List<string>();
-                if (mngr.SuggestionMap.ContainsKey(origName)) {
-                     entries=  mngr.SuggestionMap[origName];
+                if (matches != null) {
+                    entries = matches;
+                }
+                else if (mngr.SuggestionMap.ContainsKey(origName)) {
+                     entries =  mngr.SuggestionMap[origName];
                 }
                 //var lst = mngr.SuggestionMap.ElementAt(ind).Value;
 
@@ -102,6 +105,28 @@ namespace CodingHood
             bow.RewriteFieldPlaces();
             bow.RichTextBox.Select(mFldPlace.OutPutTextStart, mFldPlace.OutLength);
             SuggestBox.Visible = false;
+        }
+
+        internal void CheckHistoryEntries(CodeBow.FieldPlace fieldPlace)
+        {
+            var origName = CodeBow.Current.GetOriginalFieldName(fieldPlace);
+            FieldHistoryMngr mngr = FieldHistoryMngr.Instance;
+            var entries = mngr.SuggestionMap[origName];
+            var matches = entries.Where(e => e.ToUpper().Contains(fieldPlace.FldValue.ToUpper())).ToList();
+
+            if (matches.Count > 0)
+            {
+                ShowSuggestions(matches);
+            }
+            else
+            {
+                HideSuggestions();
+            }
+
+            //foreach (var e in entries)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(e);
+            //}
         }
     }
 }

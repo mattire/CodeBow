@@ -65,6 +65,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(154, 22);
             this.textBox1.TabIndex = 7;
+            this.textBox1.Enter += new System.EventHandler(this.SearchEntered);
             // 
             // listBox1
             // 
