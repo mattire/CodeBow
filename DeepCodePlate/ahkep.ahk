@@ -29,7 +29,8 @@ return
 
 RunSnips(){
     Send, ^c
-    Run %A_ScriptDir%\CodeBow.exe
+    ; Run %A_ScriptDir%\CodeBow.exe
+    Run, CodeBow.exe, %A_ScriptDir%
     WinWait, CodeBow
     WinWaitClose, CodeBow
     Sleep, 50
