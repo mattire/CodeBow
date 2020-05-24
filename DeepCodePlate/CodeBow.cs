@@ -207,13 +207,16 @@ namespace CodingHood
             return txt;
         }
 
+
         private void SelectSnippet(string sel)
         {
-            PreviewSnippet(sel);
-            textBox1.Text = sel;
+            SelectedTxt = null;
+            //SelectedTxt = sel;
+            //PreviewSnippet(sel);
+            //textBox1.Text = sel;
             richTextBox2.Focus();
-            FieldHistoryMngr.Instance.LoadHistory();
-            SnippetInited = true;
+            //FieldHistoryMngr.Instance.LoadHistory();
+            //SnippetInited = true;
         }
 
         private void PreviewSnippet(string sel)
@@ -641,5 +644,29 @@ namespace CodingHood
             SnippetInited = false;
         }
 
+        public string SelectedTxt { get; set; }
+
+        private void RichTextBoxEnter(object sender, EventArgs e)
+        {
+            if (Snippets.Contains(textBox1.Text))
+            {
+                SelectedTxt = textBox1.Text;
+            }
+            else if (SelectedTxt == null && listBox1.Items.Count > 0) {
+                if (listBox1.SelectedItem != null) { SelectedTxt = (string)listBox1.SelectedItem; }
+                else { SelectedTxt = (string)listBox1.Items[0]; }
+            }
+            if (SelectedTxt == null) { return; }
+            PreviewSnippet( SelectedTxt);
+            textBox1.Text = SelectedTxt;
+            FieldHistoryMngr.Instance.LoadHistory();
+            SnippetInited = true;
+            mTabHandler.SelectFirstFld();
+        }
+
+        private void SearchLeave(object sender, EventArgs e)
+        {
+            SelectedTxt = null; // set to null, so logic above can decide what is selected
+        }
     }
 }

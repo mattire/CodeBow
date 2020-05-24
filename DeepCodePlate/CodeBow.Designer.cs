@@ -34,8 +34,8 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.richTextBox2 = new CodingHood.CodeRichTextBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.richTextBox2 = new CodingHood.CodeRichTextBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -66,6 +66,7 @@
             this.textBox1.Size = new System.Drawing.Size(154, 22);
             this.textBox1.TabIndex = 7;
             this.textBox1.Enter += new System.EventHandler(this.SearchEntered);
+            this.textBox1.Leave += new System.EventHandler(this.SearchLeave);
             // 
             // listBox1
             // 
@@ -98,6 +99,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 16;
+            this.listBox2.Location = new System.Drawing.Point(36, 92);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(165, 276);
+            this.listBox2.TabIndex = 11;
+            // 
             // richTextBox2
             // 
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -107,17 +117,9 @@
             this.richTextBox2.Location = new System.Drawing.Point(172, 220);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(896, 229);
-            this.richTextBox2.TabIndex = 1;
+            this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
-            // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(36, 92);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(165, 276);
-            this.listBox2.TabIndex = 11;
+            this.richTextBox2.Enter += new System.EventHandler(this.RichTextBoxEnter);
             // 
             // CodeBow
             // 
