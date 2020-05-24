@@ -1,0 +1,17 @@
+try
+{
+    #*content*#
+}
+catch (Exception #*exp*#)
+{
+    #*end*#
+}
+
+try
+{
+    #*content*#
+}
+catch (Exception #*exp*#)
+{
+    #*end*#
+}

@@ -1,0 +1,1 @@
+Dictionary<#*field1*#, #*field2*#> #*dict*# = new Dictionary<#*field1*#, #*field2*#>();
