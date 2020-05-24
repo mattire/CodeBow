@@ -387,7 +387,9 @@ namespace CodingHood
         {
             int fldPos = selStart - fp.OutPutTextStart;
             string value = (string)fp.FldValue.Clone();
-            value = value.Remove(fldPos, selLen);
+            if (fldPos + selLen > value.Length) { value = ""; }
+            else { value = value.Remove(fldPos, selLen); }
+
             if (keyChar == '\b') { } // nothing to do
             else
             {

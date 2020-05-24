@@ -68,6 +68,17 @@ namespace CodingHood
             }
         }
 
+        internal void HandleTabForward()
+        {
+            if (SuggestBox.Visible) {
+                if (SuggestBox.SelectedItem != null) {
+                    HandleEnterKey();
+                }
+            }
+
+            HideSuggestions();
+        }
+
         private void StoreFldInd()
         {
             var bow = CodeBow.Current;
@@ -97,14 +108,15 @@ namespace CodingHood
 
         internal void HandleEnterKey()
         {
-            
-            var item = (string)SuggestBox.SelectedItem;
-            //CodeBow.Current.CurrentFieldPlace.FldValue = item;
-            var bow = CodeBow.Current;
-            bow.Process(mFldPlace, item, mFldInd);
-            bow.RewriteFieldPlaces();
-            bow.RichTextBox.Select(mFldPlace.OutPutTextStart, mFldPlace.OutLength);
-            SuggestBox.Visible = false;
+            if (SuggestBox.Visible) {
+                var item = (string)SuggestBox.SelectedItem;
+                //CodeBow.Current.CurrentFieldPlace.FldValue = item;
+                var bow = CodeBow.Current;
+                bow.Process(mFldPlace, item, mFldInd);
+                bow.RewriteFieldPlaces();
+                bow.RichTextBox.Select(mFldPlace.OutPutTextStart, mFldPlace.OutLength);
+                SuggestBox.Visible = false;
+            }
         }
 
         internal void CheckHistoryEntries(CodeBow.FieldPlace fieldPlace)

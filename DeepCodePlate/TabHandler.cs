@@ -53,8 +53,9 @@ namespace CodingHood
 
         private void MCodeBox_TabForward(object sender, EventArgs e)
         {
+            SuggestionMngr.Instance.HandleTabForward();
             DetermineSelectedFieldPlace();
-            
+
             if (mTabFieldPlaceInd < MFieldPlaces.Count-1) {
                 mTabFieldPlaceInd++;
             }
