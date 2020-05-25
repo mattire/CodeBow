@@ -650,13 +650,16 @@ namespace CodingHood
 
         private void RichTextBoxEnter(object sender, EventArgs e)
         {
-            if (Snippets.Contains(textBox1.Text))
+            if (listBox1.SelectedItem != null) { SelectedTxt = (string)listBox1.SelectedItem; }
+            else if (Snippets.Contains(textBox1.Text))
             {
                 SelectedTxt = textBox1.Text;
             }
             else if (SelectedTxt == null && listBox1.Items.Count > 0) {
-                if (listBox1.SelectedItem != null) { SelectedTxt = (string)listBox1.SelectedItem; }
-                else { SelectedTxt = (string)listBox1.Items[0]; }
+                //if (listBox1.SelectedItem != null) { SelectedTxt = (string)listBox1.SelectedItem; }
+                //else {
+                    SelectedTxt = (string)listBox1.Items[0];
+                //}
             }
             if (SelectedTxt == null) { return; }
             PreviewSnippet( SelectedTxt);
