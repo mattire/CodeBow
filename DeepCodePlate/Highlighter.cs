@@ -41,14 +41,20 @@ namespace CodingHood
             var selStart = mCodeBow.RichTextBox.SelectionStart;
             var selLen = mCodeBow.RichTextBox.SelectionLength;
 
-            mCodeBow.RichTextBox.SelectionColor = Color.LightGray;
+            mCodeBow.RichTextBox.SelectAll();
+            mCodeBow.RichTextBox.SelectionBackColor = Color.White;
+
+            //mCodeBow.RichTextBox.SelectionColor = Color.LightGray;
 
             mCodeBow.FieldPlaces.Where(fp1 => fp1.FldName == fpl.FldName).ToList().ForEach(fp =>
             {
                 int len = fp.OutPutTextEnd - fp.OutPutTextStart;
-                mCodeBow.RichTextBox.Select(fp.OutPutTextStart, len);
+                mCodeBow.RichTextBox.Select(fp.OutPutTextStart, fp.OutLength);
                 //mCodeBow.RichTextBox.SelectionBackColor = Color.LightSalmon;
                 //mCodeBow.RichTextBox.SelectionBackColor = Color.LightGoldenrodYellow;
+                
+                System.Diagnostics.Debug.WriteLine(fp.OutPutTextStart + " " + fp.OutLength);
+                System.Diagnostics.Debug.WriteLine(fp.OutPutTextStart + " " + len);
                 mCodeBow.RichTextBox.SelectionBackColor = Color.LightGray;
             });
             //mCodeBow.RichTextBox
