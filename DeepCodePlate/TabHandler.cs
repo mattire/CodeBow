@@ -53,17 +53,19 @@ namespace CodingHood
 
         private void MCodeBox_TabForward(object sender, EventArgs e)
         {
-            SuggestionMngr.Instance.HandleTabForward();
-            DetermineSelectedFieldPlace();
+            if (MFieldPlaces.Count != 0) {
+                SuggestionMngr.Instance.HandleTabForward();
+                DetermineSelectedFieldPlace();
 
-            if (mTabFieldPlaceInd < MFieldPlaces.Count-1) {
-                mTabFieldPlaceInd++;
+                if (mTabFieldPlaceInd < MFieldPlaces.Count-1) {
+                    mTabFieldPlaceInd++;
+                }
+                else {
+                    mTabFieldPlaceInd = 0;
+                }
+                var fp = MFieldPlaces.ElementAt(mTabFieldPlaceInd);
+                fp.Select();
             }
-            else {
-                mTabFieldPlaceInd = 0;
-            }
-            var fp = MFieldPlaces.ElementAt(mTabFieldPlaceInd);
-            fp.Select();
         }
 
         private void MCodeBox_TabBackward(object sender, EventArgs e)

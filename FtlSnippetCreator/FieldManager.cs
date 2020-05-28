@@ -109,7 +109,7 @@ namespace FtlcCommonLib
                 var mdlPart = newFldCntntWSE;
                 var lstPart = mContents.Substring(hldr.End, mContents.Length - hldr.End);
                 var newContent = fstPart + mdlPart + lstPart;
-                System.Diagnostics.Debug.WriteLine(newContent);
+                //System.Diagnostics.Debug.WriteLine(newContent);
                 Refresh(newContent);
                 mInputHandler.Len = 0;
             }
