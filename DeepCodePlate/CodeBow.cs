@@ -177,7 +177,10 @@ namespace CodingHood
             Current = this;
             InitializeComponent();
 
-            richTextBox1.Enabled = false;
+            SetupScriptMode();
+            
+
+
             listBox2.Visible = false;
             mHighlighter = new Highlighter(this);
             mTabHandler = new TabHandler(this);
@@ -214,14 +217,9 @@ namespace CodingHood
 
         private void SelectSnippet(string sel)
         {
-            
             SelectedTxt = null;
-            //SelectedTxt = sel;
-            //PreviewSnippet(sel);
-            //textBox1.Text = sel;
             richTextBox2.Focus();
             //FieldHistoryMngr.Instance.LoadHistory();
-            //SnippetInited = true;
         }
 
         public string CurrentFileName { get; set; }
@@ -230,6 +228,8 @@ namespace CodingHood
         {
             var fn = sel + ".txt";
             CurrentFileName = fn;
+            SetupScriptMode();
+                 
             var path = Path.Combine(SnippetFld, fn);
             var txt = File.ReadAllText(path);
             FldText = HandleLineFeeds(txt);
@@ -684,13 +684,13 @@ namespace CodingHood
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (btnEdit.Text == "&Edit") {
-                richTextBox1.Enabled = true;
-                btnEdit.Text = "&Save";
-                richTextBox1.Select();
+            if (btnEdit.Text == "E&dit")
+            {
+                SetupEditMode();
             }
-            else                         {
-                btnEdit.Text  = "&Edit";
+            else
+            {
+                //SetScriptupMode();
                 SaveScript();
             }
         }
@@ -704,7 +704,7 @@ namespace CodingHood
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                richTextBox1.Enabled = false;
+                SetupScriptMode();
                 Stream saveStream;
                 if ((saveStream = saveFileDialog1.OpenFile()) != null)
                 {
@@ -717,6 +717,25 @@ namespace CodingHood
                 }
                 richTextBox2.Select();
             }
+        }
+
+        private void SetupEditMode() {
+            richTextBox1.Enabled = true;
+            richTextBox1.Visible = true;
+            richTextBox2.Enabled = false;
+            richTextBox2.Visible = false;
+            btnEdit.Text = "&Save";
+            richTextBox1.Select();
+        }
+
+        private void SetupScriptMode()
+        {
+            richTextBox1.Enabled = false;
+            richTextBox1.Visible = false;
+            richTextBox2.Enabled = true;
+            richTextBox2.Visible = true;
+            btnEdit.Text = "E&dit";
+            richTextBox2.Select();
         }
     }
 }
