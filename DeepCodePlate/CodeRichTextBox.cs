@@ -37,15 +37,10 @@ namespace CodingHood
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                //if (SuggestUIMngr.Current?.mListBox.Visible == true)
-                //{
-                //    SuggestUIMngr.Current.HandleSuggestBoxKeys(null, e);
-                //}
-                //else
-                //{
-                //    EnterPressed?.Invoke(this, e);
-                //}
-                //e.SuppressKeyPress = true;
+                if (SuggestionMngr.Instance.SuggestBox.Visible == true) {
+                    TabForward?.Invoke(this, e);
+                    e.SuppressKeyPress = true;
+                }
             }
             else
             {
