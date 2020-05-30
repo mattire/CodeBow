@@ -704,7 +704,7 @@ namespace CodingHood
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                SetupScriptMode();
+                SetupScriptMode(selectScriptWindow:true);
                 Stream saveStream;
                 if ((saveStream = saveFileDialog1.OpenFile()) != null)
                 {
@@ -728,14 +728,16 @@ namespace CodingHood
             richTextBox1.Select();
         }
 
-        private void SetupScriptMode()
+        private void SetupScriptMode(bool selectScriptWindow=false)
         {
             richTextBox1.Enabled = false;
             richTextBox1.Visible = false;
             richTextBox2.Enabled = true;
             richTextBox2.Visible = true;
             btnEdit.Text = "E&dit";
-            richTextBox2.Select();
+            if (selectScriptWindow) {
+                richTextBox2.Select();
+            }
         }
     }
 }
