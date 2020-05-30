@@ -169,11 +169,15 @@ namespace CodingHood
 
         public CodeBow()
         {
+
             SnippetInited = false;
             RefreshSnippets();
 
+
             Current = this;
             InitializeComponent();
+
+            richTextBox1.Enabled = false;
             listBox2.Visible = false;
             mHighlighter = new Highlighter(this);
             mTabHandler = new TabHandler(this);
@@ -210,6 +214,7 @@ namespace CodingHood
 
         private void SelectSnippet(string sel)
         {
+            
             SelectedTxt = null;
             //SelectedTxt = sel;
             //PreviewSnippet(sel);
@@ -219,9 +224,12 @@ namespace CodingHood
             //SnippetInited = true;
         }
 
+        public string CurrentFileName { get; set; }
+
         private void PreviewSnippet(string sel)
         {
             var fn = sel + ".txt";
+            CurrentFileName = fn;
             var path = Path.Combine(SnippetFld, fn);
             var txt = File.ReadAllText(path);
             FldText = HandleLineFeeds(txt);
@@ -672,6 +680,43 @@ namespace CodingHood
         private void SearchLeave(object sender, EventArgs e)
         {
             SelectedTxt = null; // set to null, so logic above can decide what is selected
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (btnEdit.Text == "&Edit") {
+                richTextBox1.Enabled = true;
+                btnEdit.Text = "&Save";
+                richTextBox1.Select();
+            }
+            else                         {
+                btnEdit.Text  = "&Edit";
+                SaveScript();
+            }
+        }
+
+        private void SaveScript()
+        {
+            string SnipPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), SnippetFld);
+
+            saveFileDialog1.InitialDirectory = SnipPath;
+            saveFileDialog1.FileName = CurrentFileName;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Enabled = false;
+                Stream saveStream;
+                if ((saveStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    // Code to write the stream goes here.
+                    using (var sw = new StreamWriter(saveStream))
+                    {
+                        sw.Write(richTextBox1.Text);
+                    }
+                    saveStream.Close();
+                }
+                richTextBox2.Select();
+            }
         }
     }
 }

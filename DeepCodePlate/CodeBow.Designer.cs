@@ -36,6 +36,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.richTextBox2 = new CodingHood.CodeRichTextBox();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.panelEdit = new System.Windows.Forms.Panel();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.panelEdit.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -121,11 +125,31 @@
             this.richTextBox2.Text = "";
             this.richTextBox2.Enter += new System.EventHandler(this.RichTextBoxEnter);
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(3, 4);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 26);
+            this.btnEdit.TabIndex = 12;
+            this.btnEdit.Text = "&Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // panelEdit
+            // 
+            this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEdit.Controls.Add(this.btnEdit);
+            this.panelEdit.Location = new System.Drawing.Point(1075, 13);
+            this.panelEdit.Name = "panelEdit";
+            this.panelEdit.Size = new System.Drawing.Size(173, 436);
+            this.panelEdit.TabIndex = 13;
+            // 
             // CodeBow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 487);
+            this.Controls.Add(this.panelEdit);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -137,6 +161,7 @@
             this.Name = "CodeBow";
             this.Text = "CodeBow";
             this.Shown += new System.EventHandler(this.FormShown);
+            this.panelEdit.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +177,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Panel panelEdit;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
