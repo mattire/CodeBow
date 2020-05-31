@@ -204,8 +204,13 @@ namespace CodingHood
             //FldText = "<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>\r\n<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>";
 
             ProcessText();
-            //label2.Focus();
-            //textBox1.Select();
+
+            richTextBox2.EnterPressed += RichTextBox2_EnterPressed;
+        }
+
+        private void RichTextBox2_EnterPressed(object sender, EventArgs e)
+        {
+            button1_Ok_Click(sender, e);
         }
 
         private string HandleLineFeeds(string txt) {

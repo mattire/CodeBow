@@ -37,9 +37,13 @@ namespace CodingHood
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                if (SuggestionMngr.Instance.SuggestBox.Visible == true) {
+                if (SuggestionMngr.Instance.SuggestBox.Visible == true)
+                {
                     TabForward?.Invoke(this, e);
                     e.SuppressKeyPress = true;
+                }
+                else {
+                    EnterPressed?.Invoke(this, e);
                 }
             }
             else
