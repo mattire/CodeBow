@@ -31,8 +31,10 @@ namespace CodingHood
             TextBox.TextChanged += new System.EventHandler(this.SearchTextChanged);
             ListBox.SelectedIndexChanged += (s, e) =>
             {
-                var sel = ListBox.SelectedItem.ToString();
-                this.listBoxSelectionChangeHandling(sel);
+                if (ListBox.SelectedIndex != -1) {
+                    var sel = ListBox.SelectedItem.ToString();
+                    this.listBoxSelectionChangeHandling(sel);
+                }
             };
         }
 
@@ -85,6 +87,16 @@ namespace CodingHood
                     handleChosen(sel);
                     e.Handled = true;
                     CodeBow.Current.MTabHandler.SelectFirstFld();
+                }
+            }
+            if(e.KeyCode == Keys.Escape)
+            {
+                if (ListBox.SelectedIndex == -1)
+                {
+                    CodeBow.Current.Close();
+                }
+                else {
+                    ListBox.ClearSelected();
                 }
             }
         }
