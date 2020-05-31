@@ -723,6 +723,7 @@ namespace CodingHood
         }
 
         private void SetupEditMode() {
+            btnNew.Hide();
             richTextBox1.Enabled = true;
             richTextBox1.Visible = true;
             richTextBox2.Enabled = false;
@@ -733,6 +734,7 @@ namespace CodingHood
 
         private void SetupScriptMode(bool selectScriptWindow=false)
         {
+            btnNew.Show();
             richTextBox1.Enabled = false;
             richTextBox1.Visible = false;
             richTextBox2.Enabled = true;
@@ -741,6 +743,12 @@ namespace CodingHood
             if (selectScriptWindow) {
                 richTextBox2.Select();
             }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            
+            SetupEditMode();
         }
     }
 }

@@ -39,6 +39,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btnNew = new System.Windows.Forms.Button();
             this.panelEdit.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,7 +129,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(3, 4);
+            this.btnEdit.Location = new System.Drawing.Point(3, 16);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 26);
             this.btnEdit.TabIndex = 12;
@@ -139,11 +140,22 @@
             // panelEdit
             // 
             this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEdit.Controls.Add(this.btnNew);
             this.panelEdit.Controls.Add(this.btnEdit);
             this.panelEdit.Location = new System.Drawing.Point(1075, 13);
             this.panelEdit.Name = "panelEdit";
             this.panelEdit.Size = new System.Drawing.Size(173, 436);
             this.panelEdit.TabIndex = 13;
+            // 
+            // button3
+            // 
+            this.btnNew.Location = new System.Drawing.Point(3, 48);
+            this.btnNew.Name = "button3";
+            this.btnNew.Size = new System.Drawing.Size(75, 26);
+            this.btnNew.TabIndex = 13;
+            this.btnNew.Text = "&New";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // CodeBow
             // 
@@ -181,6 +193,7 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Panel panelEdit;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button btnNew;
     }
 }
 
