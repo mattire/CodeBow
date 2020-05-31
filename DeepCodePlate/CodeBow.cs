@@ -200,10 +200,8 @@ namespace CodingHood
 
             //textBox1.Focus();
 
-            FldText = "<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>\n<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>";
-            //FldText = "<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>\r\n<#*Element*#>\r\n#*SurroundContent*#\r\n</#*Element*#>";
-
-            ProcessText();
+            //FldText = "<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>\n<#*Element*#>\n#*SurroundContent*#\n<//#*Element*#>";
+            //ProcessText();
 
             richTextBox2.EnterPressed += RichTextBox2_EnterPressed;
         }
