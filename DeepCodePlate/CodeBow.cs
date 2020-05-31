@@ -696,11 +696,11 @@ namespace CodingHood
             else
             {
                 //SetScriptupMode();
-                SaveScript();
+                SaveScript(richTextBox1.Text);
             }
         }
 
-        private void SaveScript()
+        private void SaveScript(string txt)
         {
             string SnipPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), SnippetFld);
 
@@ -716,7 +716,7 @@ namespace CodingHood
                     // Code to write the stream goes here.
                     using (var sw = new StreamWriter(saveStream))
                     {
-                        sw.Write(richTextBox1.Text);
+                        sw.Write(txt);
                     }
                     saveStream.Close();
                 }
