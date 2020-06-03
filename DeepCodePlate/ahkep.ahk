@@ -71,7 +71,7 @@ RunTabSequence() {
     Loop % arr.MaxIndex()
     {
         txt := arr[A_Index]
-        Send, %txt%
+        SendRaw, %txt%
         Send, {tab}
     }
 }
