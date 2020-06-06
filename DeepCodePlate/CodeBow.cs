@@ -262,6 +262,12 @@ namespace CodingHood
                 sgstMngr.ShowSuggestions();
                 e.Handled = true;
             }
+            if (e.KeyCode == Keys.V && e.Control)
+            {
+                HandleCopyPaste(e);
+                e.Handled = true;
+            }
+
             if (SuggestBox.Visible == true)
             {
                 if (e.KeyCode == Keys.Escape) {
@@ -293,6 +299,40 @@ namespace CodingHood
             SelectionLenghtOnKeyDown = richTextBox2.SelectionLength;
         }
 
+        private void HandleCopyPaste(KeyEventArgs e)
+        {
+            var fp = CurrentFieldPlace;
+            if (fp != null) {
+                //fp.Paste(Clipboard.GetText());
+                var txt = Clipboard.GetText();
+                int rbStart = richTextBox2.SelectionStart;
+                int rbLen   = richTextBox2.SelectionLength;
+
+                var fld = Fields.FirstOrDefault(f => f.Name == fp.FldName);
+                var fldPlaces = FieldPlaces.Where(fpl => fpl.FldName == fld.Name).ToList();
+
+                int fldPos = rbStart - fp.OutPutTextStart;
+                var val = (string)fp.FldValue.Clone();
+                if (rbLen == 0)
+                {
+                    val = val.Insert(fldPos, txt);
+                }
+                else {
+                    bool endsOutside = rbStart + rbLen > fp.FldOuterEnd;
+                    if (!endsOutside) { val = val.Remove(fldPos, rbLen); }
+                    else { val = val.Substring(0, fldPos); }
+                    val = val.Insert(fldPos, txt);
+                }
+                fld.Value = val;
+
+                // Write to all FieldPlaces
+                fldPlaces.ForEach(fpl => fpl.FldValue = val);
+                RewriteFieldPlaces();
+
+                richTextBox2.SelectionStart = fp.FldOuterStart;
+            }
+        }
+
         public bool HandleSelectionChanged { get; set; } = true;
         private void RichTextBox2_SelectionChanged(object sender, EventArgs e)
         {
@@ -315,7 +355,9 @@ namespace CodingHood
                 }
             }
 
-            if (e.KeyChar == '\u001b') {
+
+
+            if (e.KeyChar == '\u001b' || e.KeyChar == '\u0016') {
                 e.Handled= true;
                 return;
             }
