@@ -284,6 +284,14 @@ namespace CodingHood
                 e.Handled = true;
             }
 
+            if (e.KeyCode == Keys.C && e.Control)
+            {
+                Clipboard.SetText(richTextBox2.SelectedText);
+                e.Handled = true;
+                return;
+            }
+
+
             if (SuggestBox.Visible == true)
             {
                 if (e.KeyCode == Keys.Escape) {
@@ -348,7 +356,7 @@ namespace CodingHood
                 // Write to all FieldPlaces
                 fldPlaces.ForEach(fpl => fpl.FldValue = val);
                 RewriteFieldPlaces();
-                System.Diagnostics.Debug.WriteLine(ind);
+                //System.Diagnostics.Debug.WriteLine(ind);
 
                 // get current fieldPlace
                 var fpUpd = FieldPlaces.ElementAt(inds);
@@ -378,9 +386,9 @@ namespace CodingHood
                 }
             }
 
+            List<char> skipKeys = new List<char> { '\u001b', '\u0016', '\u0003' };
 
-
-            if (e.KeyChar == '\u001b' || e.KeyChar == '\u0016') {
+            if (skipKeys.Contains(e.KeyChar)) {
                 e.Handled= true;
                 return;
             }
