@@ -35,11 +35,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.richTextBox2 = new CodingHood.CodeRichTextBox();
             this.btnEdit = new System.Windows.Forms.Button();
             this.panelEdit = new System.Windows.Forms.Panel();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btnNew = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.btnToFields = new System.Windows.Forms.Button();
+            this.btnToField = new System.Windows.Forms.Button();
+            this.richTextBox2 = new CodingHood.CodeRichTextBox();
             this.panelEdit.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,19 +116,6 @@
             this.listBox2.Size = new System.Drawing.Size(165, 276);
             this.listBox2.TabIndex = 11;
             // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(172, 33);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(896, 416);
-            this.richTextBox2.TabIndex = 8;
-            this.richTextBox2.Text = "";
-            this.richTextBox2.Enter += new System.EventHandler(this.RichTextBoxEnter);
-            // 
             // btnEdit
             // 
             this.btnEdit.Location = new System.Drawing.Point(3, 16);
@@ -140,6 +129,8 @@
             // panelEdit
             // 
             this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEdit.Controls.Add(this.btnToField);
+            this.panelEdit.Controls.Add(this.btnToFields);
             this.panelEdit.Controls.Add(this.btnNew);
             this.panelEdit.Controls.Add(this.btnEdit);
             this.panelEdit.Location = new System.Drawing.Point(1075, 13);
@@ -147,15 +138,53 @@
             this.panelEdit.Size = new System.Drawing.Size(173, 436);
             this.panelEdit.TabIndex = 13;
             // 
-            // button3
+            // btnNew
             // 
+            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNew.Location = new System.Drawing.Point(3, 48);
-            this.btnNew.Name = "button3";
+            this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 26);
             this.btnNew.TabIndex = 13;
             this.btnNew.Text = "&New";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnToFields
+            // 
+            this.btnToFields.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToFields.Location = new System.Drawing.Point(3, 80);
+            this.btnToFields.Name = "btnToFields";
+            this.btnToFields.Size = new System.Drawing.Size(75, 32);
+            this.btnToFields.TabIndex = 14;
+            this.btnToFields.Text = "&ToFields";
+            this.btnToFields.UseVisualStyleBackColor = true;
+            this.btnToFields.Visible = false;
+            this.btnToFields.Click += new System.EventHandler(this.btnToField_Click);
+            // 
+            // btnToField
+            // 
+            this.btnToField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToField.Location = new System.Drawing.Point(3, 118);
+            this.btnToField.Name = "btnToField";
+            this.btnToField.Size = new System.Drawing.Size(75, 32);
+            this.btnToField.TabIndex = 15;
+            this.btnToField.Text = "ToF&ield";
+            this.btnToField.UseVisualStyleBackColor = true;
+            this.btnToField.Visible = false;
+            this.btnToField.Click += new System.EventHandler(this.btnToField_Click_1);
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox2.Location = new System.Drawing.Point(172, 33);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(896, 416);
+            this.richTextBox2.TabIndex = 8;
+            this.richTextBox2.Text = "";
+            this.richTextBox2.Enter += new System.EventHandler(this.RichTextBoxEnter);
             // 
             // CodeBow
             // 
@@ -194,6 +223,8 @@
         private System.Windows.Forms.Panel panelEdit;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnToFields;
+        private System.Windows.Forms.Button btnToField;
     }
 }
 

@@ -797,6 +797,8 @@ namespace CodingHood
 
         private void SetupEditMode() {
             btnNew.Hide();
+            btnToFields.Show();
+            btnToField.Show();
             richTextBox1.Enabled = true;
             richTextBox1.Visible = true;
             richTextBox2.Enabled = false;
@@ -808,6 +810,8 @@ namespace CodingHood
         private void SetupScriptMode(bool selectScriptWindow=false)
         {
             btnNew.Show();
+            btnToFields.Hide();
+            btnToField.Hide();
             richTextBox1.Enabled = false;
             richTextBox1.Visible = false;
             richTextBox2.Enabled = true;
@@ -822,6 +826,27 @@ namespace CodingHood
         {
             
             SetupEditMode();
+        }
+
+        private void btnToField_Click(object sender, EventArgs e)
+        {
+            var selTxt = richTextBox1.SelectedText;
+            var repTxt = 
+                        FieldPlace.StartTag + 
+                        richTextBox1.SelectedText + 
+                        FieldPlace.EndTag;
+            var newTxt = richTextBox1.Text.Replace(selTxt, repTxt);
+            richTextBox1.Text = newTxt;
+        }
+
+        private void btnToField_Click_1(object sender, EventArgs e)
+        {
+            var selTxt = richTextBox1.SelectedText;
+            var repTxt =
+                        FieldPlace.StartTag +
+                        richTextBox1.SelectedText +
+                        FieldPlace.EndTag;
+            richTextBox1.SelectedText = repTxt;
         }
     }
 }
