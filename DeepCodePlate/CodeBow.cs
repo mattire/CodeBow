@@ -109,6 +109,22 @@ namespace CodingHood
             public int OutLength { get { return OutPutTextEnd - OutPutTextStart; } }
 
             public int Order { get; set; }
+            public int FieldPlaceInd
+            {
+                get
+                {
+                    return CodeBow.Current.FieldPlaces.Where(p => p.FldName == this.FldName).ToList().IndexOf(this);
+                }
+            }
+            public int FieldsPlaceInd
+            {
+                get
+                {
+                    return CodeBow.Current.FieldPlaces.IndexOf(this);
+                }
+            }
+
+
 
             internal void Select()
             {
@@ -302,7 +318,11 @@ namespace CodingHood
         private void HandleCopyPaste(KeyEventArgs e)
         {
             var fp = CurrentFieldPlace;
-            if (fp != null) {
+            
+            if (fp != null)
+            {
+                var ind = fp.FieldPlaceInd;
+                var inds = fp.FieldsPlaceInd;
                 //fp.Paste(Clipboard.GetText());
                 var txt = Clipboard.GetText();
                 int rbStart = richTextBox2.SelectionStart;
@@ -318,7 +338,7 @@ namespace CodingHood
                     val = val.Insert(fldPos, txt);
                 }
                 else {
-                    bool endsOutside = rbStart + rbLen > fp.FldOuterEnd;
+                    bool endsOutside = rbStart + rbLen > fp.OutPutTextEnd;
                     if (!endsOutside) { val = val.Remove(fldPos, rbLen); }
                     else { val = val.Substring(0, fldPos); }
                     val = val.Insert(fldPos, txt);
@@ -328,8 +348,11 @@ namespace CodingHood
                 // Write to all FieldPlaces
                 fldPlaces.ForEach(fpl => fpl.FldValue = val);
                 RewriteFieldPlaces();
+                System.Diagnostics.Debug.WriteLine(ind);
 
-                richTextBox2.SelectionStart = fp.FldOuterStart;
+                // get current fieldPlace
+                var fpUpd = FieldPlaces.ElementAt(inds);
+                richTextBox2.SelectionStart = fpUpd.OutPutTextEnd;
             }
         }
 
