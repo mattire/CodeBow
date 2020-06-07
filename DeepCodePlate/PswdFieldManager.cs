@@ -56,22 +56,24 @@ namespace CodingHood
             return res;
         }
 
-        private string WriteFieldsBack(string str, List<int> starts, List<int> ends, List<string> decs)
+        private string WriteFieldsBack(string str, List<int> starts, List<int> ends, List<string> newStrings)
         {
             var zipped = starts.Zip(ends, (fst, scnd) => new { fst, scnd });
             for (int i = zipped.Count() - 1; i >= 0; i--)
             {
                 var pair = zipped.ElementAt(i);
-
+                var start = pair.fst + PswdStartTag.Length;
+                var end = pair.scnd;
+                str = str.Remove(start, end - start);
+                str = str.Insert(start, newStrings[0]);
             }
 
-            return null;
+            return str;
         }
 
         private void GetPswdTxts(string str, out List<int> starts, out List<int> ends, out List<string> txts) {
             starts = str.AllIndexesOf(PswdStartTag);
             ends = str.AllIndexesOf(PswdEndTag);
-            
 
             List<string> cuts = new List<string>();
             for (int i = 0; i < starts.Count; i++)
@@ -137,6 +139,13 @@ namespace CodingHood
                     }
                 }
             }
+        }
+
+        internal string CleanPswdTags(string txt)
+        {
+            txt = txt.Replace(PswdStartTag, "");
+            txt = txt.Replace(PswdEndTag, "");
+            return txt;
         }
     }
 }

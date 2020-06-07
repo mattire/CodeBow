@@ -679,7 +679,10 @@ namespace CodingHood
 
         private void button1_Ok_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(richTextBox2.Text);
+            var txt = richTextBox2.Text;
+            txt = PswdFieldManager.Instance.DecryptPassWordFields(txt);
+            txt = PswdFieldManager.Instance.CleanPswdTags(txt);
+            Clipboard.SetText(txt);
             FieldHistoryMngr.Instance.StoreValues();
             this.Close();
         }
@@ -775,6 +778,8 @@ namespace CodingHood
         {
             string SnipPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), SnippetFld);
 
+            txt = PswdFieldManager.Instance.EncryptPassWordFields(txt);
+
             saveFileDialog1.InitialDirectory = SnipPath;
             saveFileDialog1.FileName = CurrentFileName;
 
@@ -799,6 +804,7 @@ namespace CodingHood
             btnNew.Hide();
             btnToFields.Show();
             btnToField.Show();
+            btnToPswd.Show();
             richTextBox1.Enabled = true;
             richTextBox1.Visible = true;
             richTextBox2.Enabled = false;
@@ -812,6 +818,7 @@ namespace CodingHood
             btnNew.Show();
             btnToFields.Hide();
             btnToField.Hide();
+            btnToPswd.Hide();
             richTextBox1.Enabled = false;
             richTextBox1.Visible = false;
             richTextBox2.Enabled = true;
@@ -847,6 +854,18 @@ namespace CodingHood
                         richTextBox1.SelectedText +
                         FieldPlace.EndTag;
             richTextBox1.SelectedText = repTxt;
+        }
+
+
+        private void btnToPswd_Click_1(object sender, EventArgs e)
+        {
+            var selTxt = richTextBox1.SelectedText;
+            var repTxt =
+                        PswdFieldManager.PswdStartTag +
+                        richTextBox1.SelectedText +
+                        PswdFieldManager.PswdEndTag;
+            richTextBox1.SelectedText = repTxt;
+
         }
     }
 }
