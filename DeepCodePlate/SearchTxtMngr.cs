@@ -42,9 +42,17 @@ namespace CodingHood
         {
             //textBox1.TextChanged
             var search = TextBox.Text;
-            var results = Snippets.Where(t => t.ToUpper().Contains(search.ToUpper())).ToList();
+            var searchUpper = search.ToUpper();
+            var res0 = Snippets.Where(t => t.ToUpper().Contains(searchUpper)).ToList();
             ListBox.Items.Clear();
-            results.ForEach(s => { ListBox.Items.Add(s); });
+
+            var res1 = res0.Where(r => r.ToUpper().StartsWith(searchUpper)) .ToList();
+            var res2 = res0.Where(r => !r.ToUpper().StartsWith(searchUpper)).ToList();
+            res1.Sort();
+            res2.Sort();
+
+            res1.AddRange(res2);
+            res1.ForEach(s => { ListBox.Items.Add(s); });
         }
 
         private void TextBox_KeyDown(object sender, KeyEventArgs e)
