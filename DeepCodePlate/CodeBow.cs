@@ -680,8 +680,26 @@ namespace CodingHood
         private void button1_Ok_Click(object sender, EventArgs e)
         {
             var txt = richTextBox2.Text;
-            txt = PswdFieldManager.Instance.DecryptPassWordFields(txt);
-            txt = PswdFieldManager.Instance.CleanPswdTags(txt);
+            bool res = PswdFieldManager.Instance.ContainsPswds(txt);
+            if (res)
+            {
+                var inp = new Input("Enter your pin:", (result) =>
+                {
+                    if (PswdFieldManager.Instance.CheckPin(result))
+                    {
+                        txt = PswdFieldManager.Instance.DecryptPassWordFields(txt);
+                        txt = PswdFieldManager.Instance.CleanPswdTags(txt);
+                        SetClipBoardAndClose(txt);
+                    }
+                });
+                inp.Show();
+            }
+            else {
+                SetClipBoardAndClose(txt);
+            }
+        }
+
+        private void SetClipBoardAndClose(string txt) {
             Clipboard.SetText(txt);
             FieldHistoryMngr.Instance.StoreValues();
             this.Close();

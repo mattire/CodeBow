@@ -147,5 +147,21 @@ namespace CodingHood
             txt = txt.Replace(PswdEndTag, "");
             return txt;
         }
+
+        internal bool ContainsPswds(string txt)
+        {
+            if (txt.AllIndexesOf(PswdStartTag).Count > 0 && txt.AllIndexesOf(PswdStartTag).Count > 0) {
+                return true;
+            }
+            return false;
+        }
+
+        internal bool CheckPin(string result)
+        {
+            var pin = ConfigurationManager.AppSettings["Pin"];
+            System.Diagnostics.Debug.WriteLine(pin);
+            return ConfigurationManager.AppSettings["Pin"]== result;
+            //throw new NotImplementedException();
+        }
     }
 }
