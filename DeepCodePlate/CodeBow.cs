@@ -692,6 +692,7 @@ namespace CodingHood
                         SetClipBoardAndClose(txt);
                     }
                 });
+                inp.TextBox.PasswordChar = '*';
                 inp.Show();
             }
             else {
