@@ -30,10 +30,16 @@ return
 RunSnips(){
     Send, ^c
     ; Run %A_ScriptDir%\CodeBow.exe
+    
     Run, CodeBow.exe, %A_ScriptDir%
+    ;SetTitleMatchMode, 2
     WinWait, CodeBow
+    Sleep, 50
     WinWaitClose, CodeBow
     Sleep, 50
+    
+    
+    
     ;bgn := SubStr(clipboard, 1, 7)
     ;if(bgn=="{tab}`r`n")
     ; if(StartsWith(clipboard, "{tab}`r`n"))
@@ -43,7 +49,8 @@ RunSnips(){
     }
     else
     {
-		; MsgBox, Here
+        
+		MsgBox, Here
         WinGetTitle, WinTitle, A
         StringLeft, StartStr, WinTitle, 7
         if(StartStr="MINGW64")
@@ -68,20 +75,38 @@ RunTabSequence() {
     ; arr := StrSplit(theRest,"`n")
     arr := StrSplit(clipboard,"`n")
     arr.Remove(0)
-    ;MsgBox, Coord
-    if(StartsWith(arr.1, "{coord}"))
-    {
-        coords := SubStr(arr.1, 8)
-        c_arr := StrSplit(coords,",")
-        MouseClick, Left, c_arr.1, c_arr.2
-        arr.Remove(0)
-    }
     
     Loop % arr.MaxIndex()
     {
         txt := arr[A_Index]
-        SendRaw, %txt%
-        Send, {tab}
+        if(StartsWith(txt, "{coord}"))
+        {
+            coords := SubStr(arr.1, 8)
+            c_arr := StrSplit(coords,",")
+            MouseClick, Left, c_arr.1, c_arr.2
+            Sleep, 2500
+        } 
+        else if(StartsWith(txt, "{adr}"))
+        {
+            addr := SubStr(arr.1, 6)
+            Send, !{d}
+            Sleep, 1000
+            Send, %addr%
+            Sleep, 100
+            Send, {enter}
+            Sleep, 2500
+        }
+        else if(StartsWith(txt, "{exe}"))
+        {
+            location := SubStr(arr.1, 6)    
+            ; Run C:\Windows\notepad.exe %A_ScriptDir%\help.txt
+            Run %location%
+            Sleep, 2500
+        }        
+        else {
+            SendRaw, %txt%
+            Send, {tab}
+        }
     }
 }
 
