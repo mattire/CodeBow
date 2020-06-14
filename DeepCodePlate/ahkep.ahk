@@ -49,8 +49,6 @@ RunSnips(){
     }
     else
     {
-        
-		MsgBox, Here
         WinGetTitle, WinTitle, A
         StringLeft, StartStr, WinTitle, 7
         if(StartStr="MINGW64")
