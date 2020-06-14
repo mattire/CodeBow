@@ -9,7 +9,7 @@ return
 
 #-::RunSnips()
 #/::RunSnips()
-+#-::RunSnipCreator()
+; +#-::RunSnipCreator()
 
 
 ; ^,::RunSnips()
@@ -68,6 +68,15 @@ RunTabSequence() {
     ; arr := StrSplit(theRest,"`n")
     arr := StrSplit(clipboard,"`n")
     arr.Remove(0)
+    ;MsgBox, Coord
+    if(StartsWith(arr.1, "{coord}"))
+    {
+        coords := SubStr(arr.1, 8)
+        c_arr := StrSplit(coords,",")
+        MouseClick, Left, c_arr.1, c_arr.2
+        arr.Remove(0)
+    }
+    
     Loop % arr.MaxIndex()
     {
         txt := arr[A_Index]
