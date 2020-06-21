@@ -681,19 +681,31 @@ namespace CodingHood
         {
             var txt = richTextBox2.Text;
             bool res = PswdFieldManager.Instance.ContainsPswds(txt);
+            bool ps = PswdFieldManager.Instance.PinSet();
             if (res)
             {
-                var inp = new Input("Enter your pin:", (result) =>
+                Action<string> EndStuff = (str) =>
                 {
-                    if (PswdFieldManager.Instance.CheckPin(result))
+                    str = PswdFieldManager.Instance.DecryptPassWordFields(str);
+                    str = PswdFieldManager.Instance.CleanPswdTags(str);
+                    SetClipBoardAndClose(str);
+                };
+
+                if (ps)
+                {
+                    var inp = new Input("Enter your pin:", (result) =>
                     {
-                        txt = PswdFieldManager.Instance.DecryptPassWordFields(txt);
-                        txt = PswdFieldManager.Instance.CleanPswdTags(txt);
-                        SetClipBoardAndClose(txt);
-                    }
-                });
-                inp.TextBox.PasswordChar = '*';
-                inp.Show();
+                        if (PswdFieldManager.Instance.CheckPin(result))
+                        {
+                            EndStuff(txt);
+                        }
+                    });
+                    inp.TextBox.PasswordChar = '*';
+                    inp.Show();
+                }
+                else {
+                    EndStuff(txt);
+                }   
             }
             else {
                 SetClipBoardAndClose(txt);

@@ -156,6 +156,11 @@ namespace CodingHood
             return false;
         }
 
+        internal bool PinSet()
+        {
+            return ConfigurationManager.AppSettings["Pin"] != null;
+        }
+
         internal bool CheckPin(string result)
         {
             var pin = ConfigurationManager.AppSettings["Pin"];
