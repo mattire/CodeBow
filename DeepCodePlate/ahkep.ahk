@@ -79,14 +79,15 @@ RunTabSequence() {
         txt := arr[A_Index]
         if(StartsWith(txt, "{coord}"))
         {
-            coords := SubStr(arr.1, 8)
+            coords := SubStr(arr[A_Index], 8)
             c_arr := StrSplit(coords,",")
             MouseClick, Left, c_arr.1, c_arr.2
             Sleep, 2500
         } 
         else if(StartsWith(txt, "{adr}"))
         {
-            addr := SubStr(arr.1, 6)
+            addr := SubStr(arr[A_Index], 6)
+            ; addr := SubStr(arr.1, 6)
             Send, !{d}
             Sleep, 1000
             Send, %addr%
@@ -96,11 +97,18 @@ RunTabSequence() {
         }
         else if(StartsWith(txt, "{exe}"))
         {
-            location := SubStr(arr.1, 6)    
+            location := SubStr(arr[A_Index], 6)    
             ; Run C:\Windows\notepad.exe %A_ScriptDir%\help.txt
             Run %location%
             Sleep, 2500
         }        
+        else if(StartsWith(txt, "{ctrl}"))
+        {
+            chars := SubStr(arr.1, 7)
+            Send, {Ctrl Down}
+            Send, %chars%
+            Send, {Ctrl Up}
+        }
         else {
             SendRaw, %txt%
             Send, {tab}
