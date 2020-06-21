@@ -104,7 +104,7 @@ RunTabSequence() {
         }        
         else if(StartsWith(txt, "{ctrl}"))
         {
-            chars := SubStr(SubStr(arr[A_Index], 7)
+            chars := SubStr(arr[A_Index], 7)
             Send, {Ctrl Down}
             Send, %chars%
             Send, {Ctrl Up}
