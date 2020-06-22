@@ -716,6 +716,7 @@ namespace CodingHood
             Clipboard.SetText(txt);
             FieldHistoryMngr.Instance.StoreValues();
             this.Close();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -834,6 +835,7 @@ namespace CodingHood
         private void SetupEditMode() {
             btnNew.Hide();
             btnToFields.Show();
+            btnCoordsToClipboard.Show();
             btnToField.Show();
             btnToPswd.Show();
             richTextBox1.Enabled = true;
@@ -848,6 +850,7 @@ namespace CodingHood
         {
             btnNew.Show();
             btnToFields.Hide();
+            btnCoordsToClipboard.Hide();
             btnToField.Hide();
             btnToPswd.Hide();
             richTextBox1.Enabled = false;
@@ -897,6 +900,17 @@ namespace CodingHood
                         PswdFieldManager.PswdEndTag;
             richTextBox1.SelectedText = repTxt;
 
+        }
+
+        private void btnCoordsToClipboard_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("mouseGetPos2.exe"))
+            {
+                System.Diagnostics.Process.Start("mouseGetPos2.exe");
+            }
+            else {
+                MessageBox.Show("mouseGetPos2.exe not found");
+            }
         }
     }
 }

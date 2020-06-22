@@ -37,11 +37,12 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.btnEdit = new System.Windows.Forms.Button();
             this.panelEdit = new System.Windows.Forms.Panel();
+            this.btnCoordsToClipboard = new System.Windows.Forms.Button();
+            this.btnToPswd = new System.Windows.Forms.Button();
             this.btnToField = new System.Windows.Forms.Button();
             this.btnToFields = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.btnToPswd = new System.Windows.Forms.Button();
             this.richTextBox2 = new CodingHood.CodeRichTextBox();
             this.panelEdit.SuspendLayout();
             this.SuspendLayout();
@@ -52,30 +53,30 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(236, 18);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.richTextBox1.Location = new System.Drawing.Point(129, 10);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(608, 585);
+            this.richTextBox1.Size = new System.Drawing.Size(333, 319);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 20);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(9, 11);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 25);
+            this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "S&earch";
             this.label2.Enter += new System.EventHandler(this.SearchLabelEnter);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 50);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(9, 27);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(210, 29);
+            this.textBox1.Size = new System.Drawing.Size(116, 20);
             this.textBox1.TabIndex = 7;
             this.textBox1.Enter += new System.EventHandler(this.SearchEntered);
             this.textBox1.Leave += new System.EventHandler(this.SearchLeave);
@@ -83,20 +84,19 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 24;
-            this.listBox1.Location = new System.Drawing.Point(16, 92);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.Location = new System.Drawing.Point(9, 50);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(210, 556);
+            this.listBox1.Size = new System.Drawing.Size(116, 303);
             this.listBox1.TabIndex = 8;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(441, 611);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(241, 331);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 42);
+            this.button1.Size = new System.Drawing.Size(56, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "&Ok";
             this.button1.UseVisualStyleBackColor = true;
@@ -105,10 +105,10 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(552, 611);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(301, 331);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 42);
+            this.button2.Size = new System.Drawing.Size(56, 23);
             this.button2.TabIndex = 10;
             this.button2.Text = "&Cancel";
             this.button2.UseVisualStyleBackColor = true;
@@ -117,19 +117,18 @@
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 24;
-            this.listBox2.Location = new System.Drawing.Point(50, 138);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox2.Location = new System.Drawing.Point(27, 75);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(225, 412);
+            this.listBox2.Size = new System.Drawing.Size(125, 225);
             this.listBox2.TabIndex = 11;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(4, 24);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEdit.Location = new System.Drawing.Point(2, 13);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(103, 39);
+            this.btnEdit.Size = new System.Drawing.Size(56, 21);
             this.btnEdit.TabIndex = 12;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -138,24 +137,51 @@
             // panelEdit
             // 
             this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEdit.Controls.Add(this.btnCoordsToClipboard);
             this.panelEdit.Controls.Add(this.btnToPswd);
             this.panelEdit.Controls.Add(this.btnToField);
             this.panelEdit.Controls.Add(this.btnToFields);
             this.panelEdit.Controls.Add(this.btnNew);
             this.panelEdit.Controls.Add(this.btnEdit);
-            this.panelEdit.Location = new System.Drawing.Point(852, 18);
-            this.panelEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelEdit.Location = new System.Drawing.Point(465, 10);
+            this.panelEdit.Margin = new System.Windows.Forms.Padding(2);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(238, 654);
+            this.panelEdit.Size = new System.Drawing.Size(130, 354);
             this.panelEdit.TabIndex = 13;
+            // 
+            // btnCoordsToClipboard
+            // 
+            this.btnCoordsToClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCoordsToClipboard.Location = new System.Drawing.Point(2, 156);
+            this.btnCoordsToClipboard.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCoordsToClipboard.Name = "btnCoordsToClipboard";
+            this.btnCoordsToClipboard.Size = new System.Drawing.Size(56, 52);
+            this.btnCoordsToClipboard.TabIndex = 17;
+            this.btnCoordsToClipboard.Text = "C&oords to Clpbrd";
+            this.btnCoordsToClipboard.UseVisualStyleBackColor = true;
+            this.btnCoordsToClipboard.Visible = false;
+            this.btnCoordsToClipboard.Click += new System.EventHandler(this.btnCoordsToClipboard_Click);
+            // 
+            // btnToPswd
+            // 
+            this.btnToPswd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnToPswd.Location = new System.Drawing.Point(2, 126);
+            this.btnToPswd.Margin = new System.Windows.Forms.Padding(2);
+            this.btnToPswd.Name = "btnToPswd";
+            this.btnToPswd.Size = new System.Drawing.Size(56, 26);
+            this.btnToPswd.TabIndex = 16;
+            this.btnToPswd.Text = "To&Pswd";
+            this.btnToPswd.UseVisualStyleBackColor = true;
+            this.btnToPswd.Visible = false;
+            this.btnToPswd.Click += new System.EventHandler(this.btnToPswd_Click_1);
             // 
             // btnToField
             // 
             this.btnToField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToField.Location = new System.Drawing.Point(4, 177);
-            this.btnToField.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnToField.Location = new System.Drawing.Point(2, 96);
+            this.btnToField.Margin = new System.Windows.Forms.Padding(2);
             this.btnToField.Name = "btnToField";
-            this.btnToField.Size = new System.Drawing.Size(103, 48);
+            this.btnToField.Size = new System.Drawing.Size(56, 26);
             this.btnToField.TabIndex = 15;
             this.btnToField.Text = "ToF&ield";
             this.btnToField.UseVisualStyleBackColor = true;
@@ -165,10 +191,10 @@
             // btnToFields
             // 
             this.btnToFields.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToFields.Location = new System.Drawing.Point(4, 120);
-            this.btnToFields.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnToFields.Location = new System.Drawing.Point(2, 65);
+            this.btnToFields.Margin = new System.Windows.Forms.Padding(2);
             this.btnToFields.Name = "btnToFields";
-            this.btnToFields.Size = new System.Drawing.Size(103, 48);
+            this.btnToFields.Size = new System.Drawing.Size(56, 26);
             this.btnToFields.TabIndex = 14;
             this.btnToFields.Text = "&ToFields";
             this.btnToFields.UseVisualStyleBackColor = true;
@@ -178,27 +204,14 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(4, 72);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNew.Location = new System.Drawing.Point(2, 39);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(103, 39);
+            this.btnNew.Size = new System.Drawing.Size(56, 21);
             this.btnNew.TabIndex = 13;
             this.btnNew.Text = "&New";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // btnToPswd
-            // 
-            this.btnToPswd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToPswd.Location = new System.Drawing.Point(4, 233);
-            this.btnToPswd.Margin = new System.Windows.Forms.Padding(4);
-            this.btnToPswd.Name = "btnToPswd";
-            this.btnToPswd.Size = new System.Drawing.Size(103, 48);
-            this.btnToPswd.TabIndex = 16;
-            this.btnToPswd.Text = "To&Pswd";
-            this.btnToPswd.UseVisualStyleBackColor = true;
-            this.btnToPswd.Visible = false;
-            this.btnToPswd.Click += new System.EventHandler(this.btnToPswd_Click_1);
             // 
             // richTextBox2
             // 
@@ -206,19 +219,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(236, 50);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.richTextBox2.Location = new System.Drawing.Point(129, 27);
+            this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(608, 553);
+            this.richTextBox2.Size = new System.Drawing.Size(333, 301);
             this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
             this.richTextBox2.Enter += new System.EventHandler(this.RichTextBoxEnter);
             // 
             // CodeBow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1131, 730);
+            this.ClientSize = new System.Drawing.Size(617, 395);
             this.Controls.Add(this.panelEdit);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.button2);
@@ -228,7 +241,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CodeBow";
             this.Text = "CodeBow";
             this.Shown += new System.EventHandler(this.FormShown);
@@ -255,6 +268,7 @@
         private System.Windows.Forms.Button btnToFields;
         private System.Windows.Forms.Button btnToField;
         private System.Windows.Forms.Button btnToPswd;
+        private System.Windows.Forms.Button btnCoordsToClipboard;
     }
 }
 
