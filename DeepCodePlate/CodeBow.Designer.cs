@@ -52,7 +52,7 @@
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(129, 10);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
@@ -155,9 +155,9 @@
             this.btnCoordsToClipboard.Location = new System.Drawing.Point(2, 156);
             this.btnCoordsToClipboard.Margin = new System.Windows.Forms.Padding(2);
             this.btnCoordsToClipboard.Name = "btnCoordsToClipboard";
-            this.btnCoordsToClipboard.Size = new System.Drawing.Size(56, 52);
+            this.btnCoordsToClipboard.Size = new System.Drawing.Size(62, 44);
             this.btnCoordsToClipboard.TabIndex = 17;
-            this.btnCoordsToClipboard.Text = "C&oords to Clpbrd";
+            this.btnCoordsToClipboard.Text = "Coor&ds to Clipboard";
             this.btnCoordsToClipboard.UseVisualStyleBackColor = true;
             this.btnCoordsToClipboard.Visible = false;
             this.btnCoordsToClipboard.Click += new System.EventHandler(this.btnCoordsToClipboard_Click);
@@ -218,7 +218,7 @@
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox2.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox2.Location = new System.Drawing.Point(129, 27);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
