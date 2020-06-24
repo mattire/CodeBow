@@ -37,6 +37,7 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.btnEdit = new System.Windows.Forms.Button();
             this.panelEdit = new System.Windows.Forms.Panel();
+            this.btnContentTag = new System.Windows.Forms.Button();
             this.btnCoordsToClipboard = new System.Windows.Forms.Button();
             this.btnToPswd = new System.Windows.Forms.Button();
             this.btnToField = new System.Windows.Forms.Button();
@@ -128,7 +129,7 @@
             this.btnEdit.Location = new System.Drawing.Point(2, 13);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(56, 21);
+            this.btnEdit.Size = new System.Drawing.Size(62, 21);
             this.btnEdit.TabIndex = 12;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -137,6 +138,7 @@
             // panelEdit
             // 
             this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEdit.Controls.Add(this.btnContentTag);
             this.panelEdit.Controls.Add(this.btnCoordsToClipboard);
             this.panelEdit.Controls.Add(this.btnToPswd);
             this.panelEdit.Controls.Add(this.btnToField);
@@ -148,6 +150,19 @@
             this.panelEdit.Name = "panelEdit";
             this.panelEdit.Size = new System.Drawing.Size(130, 354);
             this.panelEdit.TabIndex = 13;
+            // 
+            // btnContentTag
+            // 
+            this.btnContentTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnContentTag.Location = new System.Drawing.Point(2, 204);
+            this.btnContentTag.Margin = new System.Windows.Forms.Padding(2);
+            this.btnContentTag.Name = "btnContentTag";
+            this.btnContentTag.Size = new System.Drawing.Size(62, 26);
+            this.btnContentTag.TabIndex = 18;
+            this.btnContentTag.Text = "CntntT&ag";
+            this.btnContentTag.UseVisualStyleBackColor = true;
+            this.btnContentTag.Visible = false;
+            this.btnContentTag.Click += new System.EventHandler(this.btnContentTag_Click);
             // 
             // btnCoordsToClipboard
             // 
@@ -168,7 +183,7 @@
             this.btnToPswd.Location = new System.Drawing.Point(2, 126);
             this.btnToPswd.Margin = new System.Windows.Forms.Padding(2);
             this.btnToPswd.Name = "btnToPswd";
-            this.btnToPswd.Size = new System.Drawing.Size(56, 26);
+            this.btnToPswd.Size = new System.Drawing.Size(62, 26);
             this.btnToPswd.TabIndex = 16;
             this.btnToPswd.Text = "To&Pswd";
             this.btnToPswd.UseVisualStyleBackColor = true;
@@ -181,7 +196,7 @@
             this.btnToField.Location = new System.Drawing.Point(2, 96);
             this.btnToField.Margin = new System.Windows.Forms.Padding(2);
             this.btnToField.Name = "btnToField";
-            this.btnToField.Size = new System.Drawing.Size(56, 26);
+            this.btnToField.Size = new System.Drawing.Size(62, 26);
             this.btnToField.TabIndex = 15;
             this.btnToField.Text = "ToF&ield";
             this.btnToField.UseVisualStyleBackColor = true;
@@ -194,7 +209,7 @@
             this.btnToFields.Location = new System.Drawing.Point(2, 65);
             this.btnToFields.Margin = new System.Windows.Forms.Padding(2);
             this.btnToFields.Name = "btnToFields";
-            this.btnToFields.Size = new System.Drawing.Size(56, 26);
+            this.btnToFields.Size = new System.Drawing.Size(62, 26);
             this.btnToFields.TabIndex = 14;
             this.btnToFields.Text = "&ToFields";
             this.btnToFields.UseVisualStyleBackColor = true;
@@ -207,7 +222,7 @@
             this.btnNew.Location = new System.Drawing.Point(2, 39);
             this.btnNew.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(56, 21);
+            this.btnNew.Size = new System.Drawing.Size(62, 21);
             this.btnNew.TabIndex = 13;
             this.btnNew.Text = "&New";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -269,6 +284,7 @@
         private System.Windows.Forms.Button btnToField;
         private System.Windows.Forms.Button btnToPswd;
         private System.Windows.Forms.Button btnCoordsToClipboard;
+        private System.Windows.Forms.Button btnContentTag;
     }
 }
 

@@ -836,6 +836,7 @@ namespace CodingHood
             btnNew.Hide();
             btnToFields.Show();
             btnCoordsToClipboard.Show();
+            btnContentTag.Show();
             btnToField.Show();
             btnToPswd.Show();
             richTextBox1.Enabled = true;
@@ -851,6 +852,7 @@ namespace CodingHood
             btnNew.Show();
             btnToFields.Hide();
             btnCoordsToClipboard.Hide();
+            btnContentTag.Hide();
             btnToField.Hide();
             btnToPswd.Hide();
             richTextBox1.Enabled = false;
@@ -911,6 +913,11 @@ namespace CodingHood
             else {
                 MessageBox.Show("mouseGetPos2.exe not found");
             }
+        }
+
+        private void btnContentTag_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectedText = "#*SurroundContent*#";
         }
     }
 }
