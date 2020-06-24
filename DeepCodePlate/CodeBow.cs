@@ -908,7 +908,9 @@ namespace CodingHood
         {
             if (File.Exists("mouseGetPos2.exe"))
             {
+                Clipboard.Clear();
                 System.Diagnostics.Process.Start("mouseGetPos2.exe");
+                this.WindowState = FormWindowState.Minimized;
             }
             else {
                 MessageBox.Show("mouseGetPos2.exe not found");
