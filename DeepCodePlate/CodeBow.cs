@@ -185,14 +185,14 @@ namespace CodingHood
 
         public CodeBow()
         {
-            SetEditControls();
-            SetScriptControls();
             SnippetInited = false;
             RefreshSnippets();
 
 
             Current = this;
             InitializeComponent();
+            SetEditControls();
+            SetScriptControls();
 
             SetupScriptMode();
             
@@ -934,20 +934,52 @@ namespace CodingHood
 
         private void btnCoordsToClipboard_Click(object sender, EventArgs e)
         {
-            if (File.Exists("mouseGetPos2.exe"))
-            {
+            if (RunScript("mouseGetPos2.exe")) {
                 Clipboard.Clear();
-                System.Diagnostics.Process.Start("mouseGetPos2.exe");
-                this.WindowState = FormWindowState.Minimized;
             }
-            else {
-                MessageBox.Show("mouseGetPos2.exe not found");
-            }
+            //if (File.Exists("mouseGetPos2.exe"))
+            //{
+            //    Clipboard.Clear();
+            //    System.Diagnostics.Process.Start("mouseGetPos2.exe");
+            //    this.WindowState = FormWindowState.Minimized;
+            //}
+            //else {
+            //    MessageBox.Show("mouseGetPos2.exe not found");
+            //}
         }
 
         private void btnContentTag_Click(object sender, EventArgs e)
         {
             richTextBox1.SelectedText = "#*SurroundContent*#";
+        }
+
+        private void btnQuickSave_Click(object sender, EventArgs e)
+        {
+            string selItem = (string)comboBox1.SelectedItem;
+            if (!string.IsNullOrWhiteSpace(selItem)) {
+                var fn = selItem + ".txt";
+                File.WriteAllText(fn, richTextBox2.Text);
+            }
+        }
+
+        private void btnQuickRun_Click(object sender, EventArgs e)
+        {
+            RunScript("quickScript.exe");
+        }
+
+        private bool RunScript(string script)
+        {
+            if (File.Exists(script))
+            {
+                System.Diagnostics.Process.Start(script);
+                this.WindowState = FormWindowState.Minimized;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show($"{script} not found");
+                return false;
+            }
         }
     }
 }
