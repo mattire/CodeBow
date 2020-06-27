@@ -45,7 +45,13 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.richTextBox2 = new CodingHood.CodeRichTextBox();
+            this.btnQuickSave = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnQuickRun = new System.Windows.Forms.Button();
+            this.quickPanel1 = new System.Windows.Forms.Panel();
+            this.lblQuick = new System.Windows.Forms.Label();
             this.panelEdit.SuspendLayout();
+            this.quickPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -57,7 +63,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(129, 10);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(333, 319);
+            this.richTextBox1.Size = new System.Drawing.Size(387, 292);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -94,7 +100,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(241, 331);
+            this.button1.Location = new System.Drawing.Point(145, 336);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(56, 23);
@@ -106,7 +112,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(301, 331);
+            this.button2.Location = new System.Drawing.Point(205, 336);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(56, 23);
@@ -126,7 +132,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(2, 13);
+            this.btnEdit.Location = new System.Drawing.Point(-1, 18);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(62, 21);
@@ -138,6 +144,7 @@
             // panelEdit
             // 
             this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelEdit.Controls.Add(this.btnContentTag);
             this.panelEdit.Controls.Add(this.btnCoordsToClipboard);
             this.panelEdit.Controls.Add(this.btnToPswd);
@@ -145,16 +152,16 @@
             this.panelEdit.Controls.Add(this.btnToFields);
             this.panelEdit.Controls.Add(this.btnNew);
             this.panelEdit.Controls.Add(this.btnEdit);
-            this.panelEdit.Location = new System.Drawing.Point(465, 10);
+            this.panelEdit.Location = new System.Drawing.Point(520, 10);
             this.panelEdit.Margin = new System.Windows.Forms.Padding(2);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(130, 354);
+            this.panelEdit.Size = new System.Drawing.Size(75, 319);
             this.panelEdit.TabIndex = 13;
             // 
             // btnContentTag
             // 
             this.btnContentTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnContentTag.Location = new System.Drawing.Point(2, 204);
+            this.btnContentTag.Location = new System.Drawing.Point(0, 207);
             this.btnContentTag.Margin = new System.Windows.Forms.Padding(2);
             this.btnContentTag.Name = "btnContentTag";
             this.btnContentTag.Size = new System.Drawing.Size(62, 26);
@@ -167,7 +174,7 @@
             // btnCoordsToClipboard
             // 
             this.btnCoordsToClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCoordsToClipboard.Location = new System.Drawing.Point(2, 156);
+            this.btnCoordsToClipboard.Location = new System.Drawing.Point(0, 159);
             this.btnCoordsToClipboard.Margin = new System.Windows.Forms.Padding(2);
             this.btnCoordsToClipboard.Name = "btnCoordsToClipboard";
             this.btnCoordsToClipboard.Size = new System.Drawing.Size(62, 44);
@@ -180,7 +187,7 @@
             // btnToPswd
             // 
             this.btnToPswd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToPswd.Location = new System.Drawing.Point(2, 126);
+            this.btnToPswd.Location = new System.Drawing.Point(0, 129);
             this.btnToPswd.Margin = new System.Windows.Forms.Padding(2);
             this.btnToPswd.Name = "btnToPswd";
             this.btnToPswd.Size = new System.Drawing.Size(62, 26);
@@ -193,7 +200,7 @@
             // btnToField
             // 
             this.btnToField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToField.Location = new System.Drawing.Point(2, 96);
+            this.btnToField.Location = new System.Drawing.Point(0, 99);
             this.btnToField.Margin = new System.Windows.Forms.Padding(2);
             this.btnToField.Name = "btnToField";
             this.btnToField.Size = new System.Drawing.Size(62, 26);
@@ -206,7 +213,7 @@
             // btnToFields
             // 
             this.btnToFields.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnToFields.Location = new System.Drawing.Point(2, 65);
+            this.btnToFields.Location = new System.Drawing.Point(0, 68);
             this.btnToFields.Margin = new System.Windows.Forms.Padding(2);
             this.btnToFields.Name = "btnToFields";
             this.btnToFields.Size = new System.Drawing.Size(62, 26);
@@ -219,7 +226,7 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(2, 39);
+            this.btnNew.Location = new System.Drawing.Point(-1, 43);
             this.btnNew.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(62, 21);
@@ -237,16 +244,67 @@
             this.richTextBox2.Location = new System.Drawing.Point(129, 27);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(333, 301);
+            this.richTextBox2.Size = new System.Drawing.Size(387, 302);
             this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
             this.richTextBox2.Enter += new System.EventHandler(this.RichTextBoxEnter);
+            // 
+            // btnQuickSave
+            // 
+            this.btnQuickSave.Location = new System.Drawing.Point(142, 2);
+            this.btnQuickSave.Name = "btnQuickSave";
+            this.btnQuickSave.Size = new System.Drawing.Size(54, 23);
+            this.btnQuickSave.TabIndex = 14;
+            this.btnQuickSave.Text = "Sa&ve";
+            this.btnQuickSave.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(80, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(55, 21);
+            this.comboBox1.TabIndex = 15;
+            // 
+            // btnQuickRun
+            // 
+            this.btnQuickRun.Location = new System.Drawing.Point(196, 1);
+            this.btnQuickRun.Name = "btnQuickRun";
+            this.btnQuickRun.Size = new System.Drawing.Size(54, 23);
+            this.btnQuickRun.TabIndex = 16;
+            this.btnQuickRun.Text = "&Run";
+            this.btnQuickRun.UseVisualStyleBackColor = true;
+            // 
+            // quickPanel1
+            // 
+            this.quickPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.quickPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.quickPanel1.Controls.Add(this.lblQuick);
+            this.quickPanel1.Controls.Add(this.comboBox1);
+            this.quickPanel1.Controls.Add(this.btnQuickRun);
+            this.quickPanel1.Controls.Add(this.btnQuickSave);
+            this.quickPanel1.Location = new System.Drawing.Point(340, 333);
+            this.quickPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.quickPanel1.Name = "quickPanel1";
+            this.quickPanel1.Size = new System.Drawing.Size(255, 26);
+            this.quickPanel1.TabIndex = 19;
+            this.quickPanel1.Tag = "Quick";
+            // 
+            // lblQuick
+            // 
+            this.lblQuick.AutoSize = true;
+            this.lblQuick.Location = new System.Drawing.Point(3, 6);
+            this.lblQuick.Name = "lblQuick";
+            this.lblQuick.Size = new System.Drawing.Size(71, 13);
+            this.lblQuick.TabIndex = 17;
+            this.lblQuick.Text = "Assign # key:";
             // 
             // CodeBow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 395);
+            this.ClientSize = new System.Drawing.Size(617, 368);
+            this.Controls.Add(this.quickPanel1);
             this.Controls.Add(this.panelEdit);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.button2);
@@ -261,6 +319,8 @@
             this.Text = "CodeBow";
             this.Shown += new System.EventHandler(this.FormShown);
             this.panelEdit.ResumeLayout(false);
+            this.quickPanel1.ResumeLayout(false);
+            this.quickPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,6 +345,11 @@
         private System.Windows.Forms.Button btnToPswd;
         private System.Windows.Forms.Button btnCoordsToClipboard;
         private System.Windows.Forms.Button btnContentTag;
+        private System.Windows.Forms.Button btnQuickSave;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnQuickRun;
+        private System.Windows.Forms.Panel quickPanel1;
+        private System.Windows.Forms.Label lblQuick;
     }
 }
 

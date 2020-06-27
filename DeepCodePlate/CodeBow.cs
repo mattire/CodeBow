@@ -185,7 +185,8 @@ namespace CodingHood
 
         public CodeBow()
         {
-
+            SetEditControls();
+            SetScriptControls();
             SnippetInited = false;
             RefreshSnippets();
 
@@ -832,13 +833,38 @@ namespace CodingHood
             }
         }
 
+        List<Control> lstEditControls;
+        List<Control> lstScriptControls;
+
+        private void SetEditControls()
+        {
+            lstEditControls = new List<Control>() {
+                btnToFields         ,
+                quickPanel1         ,
+                btnCoordsToClipboard,
+                btnContentTag       ,
+                btnToField          ,
+                btnToPswd           ,
+            };
+        }
+
+        private void SetScriptControls()
+        {
+            lstScriptControls = new List<Control>() {
+                btnNew,
+                quickPanel1
+            };
+        }
+
         private void SetupEditMode() {
-            btnNew.Hide();
-            btnToFields.Show();
-            btnCoordsToClipboard.Show();
-            btnContentTag.Show();
-            btnToField.Show();
-            btnToPswd.Show();
+            lstEditControls  .ForEach(ec => ec.Show());
+            lstScriptControls.ForEach(lc => lc.Hide());
+            //btnNew              .Hide();
+            //btnToFields         .Show();
+            //btnCoordsToClipboard.Show();
+            //btnContentTag       .Show();
+            //btnToField          .Show();
+            //btnToPswd           .Show();
             richTextBox1.Enabled = true;
             richTextBox1.Visible = true;
             richTextBox2.Enabled = false;
@@ -849,12 +875,14 @@ namespace CodingHood
 
         private void SetupScriptMode(bool selectScriptWindow=false)
         {
-            btnNew.Show();
-            btnToFields.Hide();
-            btnCoordsToClipboard.Hide();
-            btnContentTag.Hide();
-            btnToField.Hide();
-            btnToPswd.Hide();
+            lstEditControls.ForEach(ec =>   ec.Hide());
+            lstScriptControls.ForEach(lc => lc.Show());
+            //btnNew.Show();
+            //btnToFields.Hide();
+            //btnCoordsToClipboard.Hide();
+            //btnContentTag.Hide();
+            //btnToField.Hide();
+            //btnToPswd.Hide();
             richTextBox1.Enabled = false;
             richTextBox1.Visible = false;
             richTextBox2.Enabled = true;
