@@ -23,6 +23,8 @@ return
     IfWinExist CodeBow
     {
       WinActivate, CodeBow
+      WinWait, CodeBow
+      Send, ^v
     }
     ExitApp
 return
