@@ -955,6 +955,10 @@ namespace CodingHood
 
         private void btnQuickSave_Click(object sender, EventArgs e)
         {
+            var ac = new AhkCtrlCoords();
+            ac.Process(richTextBox1.Text, richTextBox2.Text, this.FieldPlaces);
+
+
             string selItem = (string)comboBox1.SelectedItem;
             if (!string.IsNullOrWhiteSpace(selItem)) {
                 var fn = selItem + ".txt";
