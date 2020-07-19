@@ -716,14 +716,16 @@ namespace CodingHood
         private void SetClipBoardAndClose(string txt) {
             Clipboard.SetText(txt);
             FieldHistoryMngr.Instance.StoreValues();
-            this.Close();
-            
+            //this.Close();
+            this.WindowState = FormWindowState.Minimized;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(" ");
-            this.Close();
+            Clipboard.Clear();
+            //Clipboard.SetText("");
+            //this.Close();
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void FormShown(object sender, EventArgs e)
@@ -984,6 +986,39 @@ namespace CodingHood
                 MessageBox.Show($"{script} not found");
                 return false;
             }
+        }
+
+        private void CodeBow_SizeChanged(object sender, EventArgs e)
+        {
+            bool mousePointerNotOnTaskbar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
+
+
+
+
+            if (this.WindowState == FormWindowState.Minimized && mousePointerNotOnTaskbar) {
+                notifyIcon1.Icon = SystemIcons.Application;
+                //notifyIcon1.BalloonTipText = "CodeBow app";
+                //notifyIcon1.ShowBalloonTip(1000);
+                this.ShowInTaskbar = false;
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.ShowInTaskbar = true;
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void CodeBow_Activated(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            ClipText = Clipboard.GetText();
+            textBox1.Select();
         }
     }
 }

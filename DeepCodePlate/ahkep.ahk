@@ -1,4 +1,7 @@
-﻿#f3::
+﻿#WinActivateForce
+#SingleInstance
+
+#f3::
 	Suspend, permit
 	Suspend, toggle
 return
@@ -29,16 +32,22 @@ return
 
 RunSnips(){
     Send, ^c
-    ; Run %A_ScriptDir%\CodeBow.exe
     
-    Run, CodeBow.exe, %A_ScriptDir%
     ;SetTitleMatchMode, 2
+    
+    IfWinNotExist, CodeBow
+    {
+        Run, CodeBow.exe, %A_ScriptDir%
+    }
+    PostMessage, 0x112, 0xF120,,, CodeBow,  ; 0x112 = WM_SYSCOMMAND, 0xF120 = SC_RESTORE
+    WinActivate, CodeBow
     WinWait, CodeBow
-    Sleep, 50
-    WinWaitClose, CodeBow
-    Sleep, 50
     
-    
+    Sleep, 50
+    WinWaitNotActive, CodeBow
+    ;MsgBox, here
+    ;WinWaitClose, CodeBow
+    Sleep, 50
     
     ;bgn := SubStr(clipboard, 1, 7)
     ;if(bgn=="{tab}`r`n")
