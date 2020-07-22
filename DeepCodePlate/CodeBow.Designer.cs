@@ -321,8 +321,10 @@
             this.Name = "CodeBow";
             this.Text = "CodeBow";
             this.Activated += new System.EventHandler(this.CodeBow_Activated);
+            this.Deactivate += new System.EventHandler(this.FormDeactivate);
             this.Shown += new System.EventHandler(this.FormShown);
             this.SizeChanged += new System.EventHandler(this.CodeBow_SizeChanged);
+            this.VisibleChanged += new System.EventHandler(this.FormVisibleChanged);
             this.panelEdit.ResumeLayout(false);
             this.quickPanel1.ResumeLayout(false);
             this.quickPanel1.PerformLayout();

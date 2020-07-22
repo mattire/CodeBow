@@ -718,6 +718,14 @@ namespace CodingHood
             FieldHistoryMngr.Instance.StoreValues();
             //this.Close();
             this.WindowState = FormWindowState.Minimized;
+            this.SendToBack();
+            //WindowMode = WindowModeType.OkCancelSelected;
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(2000);
+                WindowMode = WindowModeType.Finished;
+            });
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -726,6 +734,14 @@ namespace CodingHood
             //Clipboard.SetText("");
             //this.Close();
             this.WindowState = FormWindowState.Minimized;
+            this.SendToBack();
+            //WindowMode = WindowModeType.OkCancelSelected;
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(2000);
+                WindowMode =WindowModeType.Finished;
+            });
         }
 
         private void FormShown(object sender, EventArgs e)
@@ -769,6 +785,11 @@ namespace CodingHood
         }
 
         public string SelectedTxt { get; set; }
+
+        private WindowModeType WindowMode {
+            get { return windowMode; }
+            set { windowMode = value; }
+        }
 
         private void RichTextBoxEnter(object sender, EventArgs e)
         {
@@ -1016,8 +1037,37 @@ namespace CodingHood
 
         private void CodeBow_Activated(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            ClipText = Clipboard.GetText();
+            System.Diagnostics.Debug.WriteLine("LeaveMode1");
+            System.Diagnostics.Debug.WriteLine(WindowMode);
+            //if (WindowMode == WindowModeType.Finished)
+            //{
+                textBox1.Text = "";
+                ClipText = Clipboard.GetText();
+                textBox1.Select();
+                WindowMode = WindowModeType.Active;
+            //}
+        }
+
+        enum WindowModeType {
+            Active,
+            Finished,
+        }
+        WindowModeType windowMode = WindowModeType.Finished;
+
+        private void FormDeactivate(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("LeaveMode2");
+            System.Diagnostics.Debug.WriteLine(WindowMode);
+        }
+
+        private void FormVisibleChanged(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine( this.Visible);
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
             textBox1.Select();
         }
     }

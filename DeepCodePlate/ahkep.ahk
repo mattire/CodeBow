@@ -38,10 +38,12 @@ RunSnips(){
     IfWinNotExist, CodeBow
     {
         Run, CodeBow.exe, %A_ScriptDir%
+        WinWait, CodeBow
     }
-    PostMessage, 0x112, 0xF120,,, CodeBow,  ; 0x112 = WM_SYSCOMMAND, 0xF120 = SC_RESTORE
+    ; Bring window forward
+    
     WinActivate, CodeBow
-    WinWait, CodeBow
+    PostMessage, 0x112, 0xF120,,, CodeBow,  ; 0x112 = WM_SYSCOMMAND, 0xF120 = SC_RESTORE
     
     Sleep, 50
     WinWaitNotActive, CodeBow
