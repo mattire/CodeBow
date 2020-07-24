@@ -188,7 +188,6 @@ namespace CodingHood
             SnippetInited = false;
             RefreshSnippets();
 
-
             Current = this;
             InitializeComponent();
             SetEditControls();
@@ -239,6 +238,7 @@ namespace CodingHood
         {
             SelectedTxt = null;
             richTextBox2.Focus();
+            WindowMode = WindowModeType.Active;
             //FieldHistoryMngr.Instance.LoadHistory();
         }
 
@@ -689,7 +689,7 @@ namespace CodingHood
                 {
                     str = PswdFieldManager.Instance.DecryptPassWordFields(str);
                     str = PswdFieldManager.Instance.CleanPswdTags(str);
-                    SetClipBoardAndClose(str);
+                    ScriptEndActions(str);
                 };
 
                 if (ps)
@@ -709,23 +709,31 @@ namespace CodingHood
                 }   
             }
             else {
-                SetClipBoardAndClose(txt);
+                ScriptEndActions(txt);
             }
         }
 
-        private void SetClipBoardAndClose(string txt) {
+        private void ScriptEndActions(string txt) {
             Clipboard.SetText(txt);
             FieldHistoryMngr.Instance.StoreValues();
             //this.Close();
             this.WindowState = FormWindowState.Minimized;
-            this.SendToBack();
             //WindowMode = WindowModeType.OkCancelSelected;
+            RunScript("ahkep2.exe");
 
-            Task.Run(async () =>
-            {
-                await Task.Delay(2000);
-                WindowMode = WindowModeType.Finished;
-            });
+            //textBox1.Select();
+            //this.Activate();
+            WindowMode = WindowModeType.Finished;
+
+            System.Diagnostics.Debug.WriteLine("SendToBack");
+            this.SendToBack();
+
+            //Task.Run(async () =>
+            //{
+            //    await Task.Delay(2000);
+            //    //WindowMode = WindowModeType.Finished;
+            //    //textBox1.Focus();
+            //});
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -737,15 +745,19 @@ namespace CodingHood
             this.SendToBack();
             //WindowMode = WindowModeType.OkCancelSelected;
 
-            Task.Run(async () =>
-            {
-                await Task.Delay(2000);
-                WindowMode =WindowModeType.Finished;
-            });
+            System.Diagnostics.Debug.WriteLine("SendToBack");
+            this.SendToBack();
+
+            //Task.Run(async () =>
+            //{
+            //    await Task.Delay(2000);
+            //    //WindowMode =WindowModeType.Finished;
+            //});
         }
 
         private void FormShown(object sender, EventArgs e)
         {
+            PrintMethod();
             textBox1.Select();
         }
 
@@ -788,7 +800,10 @@ namespace CodingHood
 
         private WindowModeType WindowMode {
             get { return windowMode; }
-            set { windowMode = value; }
+            set {
+                windowMode = value;
+                System.Diagnostics.Debug.WriteLine($"WindowMode: {value}");
+            }
         }
 
         private void RichTextBoxEnter(object sender, EventArgs e)
@@ -1013,9 +1028,6 @@ namespace CodingHood
         {
             bool mousePointerNotOnTaskbar = Screen.GetWorkingArea(this).Contains(Cursor.Position);
 
-
-
-
             if (this.WindowState == FormWindowState.Minimized && mousePointerNotOnTaskbar) {
                 notifyIcon1.Icon = SystemIcons.Application;
                 //notifyIcon1.BalloonTipText = "CodeBow app";
@@ -1035,16 +1047,18 @@ namespace CodingHood
             }
         }
 
-        private void CodeBow_Activated(object sender, EventArgs e)
+        private void FormActivated(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LeaveMode1");
+            PrintMethod();
+            //System.Diagnostics.Debug.WriteLine("LeaveMode1");
             System.Diagnostics.Debug.WriteLine(WindowMode);
+
             //if (WindowMode == WindowModeType.Finished)
             //{
-                textBox1.Text = "";
-                ClipText = Clipboard.GetText();
-                textBox1.Select();
-                WindowMode = WindowModeType.Active;
+            //    textBox1.Text = "";
+            //    ClipText = Clipboard.GetText();
+            //    textBox1.Select();
+            //    WindowMode = WindowModeType.Active;
             //}
         }
 
@@ -1056,12 +1070,13 @@ namespace CodingHood
 
         private void FormDeactivate(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("LeaveMode2");
-            System.Diagnostics.Debug.WriteLine(WindowMode);
+            //System.Diagnostics.Debug.WriteLine("LeaveMode2");
+            //System.Diagnostics.Debug.WriteLine(WindowMode);
         }
 
         private void FormVisibleChanged(object sender, EventArgs e)
         {
+            PrintMethod();
             System.Diagnostics.Debug.WriteLine( this.Visible);
         }
 
@@ -1069,6 +1084,89 @@ namespace CodingHood
         {
             base.OnActivated(e);
             textBox1.Select();
+        }
+
+        
+        public void PrintMethod()
+        {
+
+            var st = new System.Diagnostics.StackTrace();
+            var sf = st.GetFrame(1);
+            System.Diagnostics.Debug.WriteLine("Method");
+            System.Diagnostics.Debug.WriteLine(sf.GetMethod().Name);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0112) // WM_SYSCOMMAND
+            {
+                // Check your window state here
+                if (m.WParam == new IntPtr(0xF030)) // Maximize event - SC_MAXIMIZE from Winuser.h
+                {
+                    // THe window is being maximized
+                }
+                if (m.WParam == new IntPtr(0xF120)) // Restore event - SC_RESTORE from Winuser.h
+                {
+                    System.Diagnostics.Debug.WriteLine("RESTORED !!");
+
+                    System.Diagnostics.Debug.WriteLine($"WinMod: {WindowMode}");
+                    //if (WindowMode == WindowModeType.Finished) {
+                    Task.Run(async () =>
+                    {
+                        await Task.Delay(10);
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                try
+                                {
+                                    System.Diagnostics.Debug.WriteLine("SELECT!!!");
+                                    if (textBox1.CanSelect) { System.Diagnostics.Debug.WriteLine("Con select !!"); }
+                                    textBox1.Select();
+                                    if (!textBox1.Focused) { textBox1.Focus(); }
+                                    System.Diagnostics.Debug.WriteLine("SELECT END!!!");
+                                }
+                                catch (Exception exp)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(exp.ToString());
+                                }
+                            });
+                    });
+                        //textBox1.Select();
+                        //WindowMode = WindowModeType.Active;
+                    //}
+                }
+
+                //
+            }
+            base.WndProc(ref m);
+        }
+
+        public TextBox SearchBox { get { return textBox1; } }
+
+        /// <summary>
+        /// Hide from task switcher
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                /*/
+                System.Diagnostics.Debug.WriteLine("CREATE PARAMS CALLED");
+                return base.CreateParams;
+                //
+                if (WindowMode == WindowModeType.Finished)
+                {
+                    var Params = base.CreateParams;
+                    Params.ExStyle |= 0x80;
+                    return Params;
+                }
+                else {
+                    return base.CreateParams;
+                }
+                //*/
+                var Params = base.CreateParams;
+                Params.ExStyle |= 0x80;
+                return Params;
+            }
         }
     }
 }

@@ -16,6 +16,8 @@ else
         Send, ^v
     }
 }
+WinSet, Bottom,,CodeBow
+
 
 RunTabSequence() {
     ; theRest := SubStr(clipboard, 8)

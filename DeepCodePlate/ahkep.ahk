@@ -42,35 +42,34 @@ RunSnips(){
     }
     ; Bring window forward
     
-    WinActivate, CodeBow
+    cbActive := WinActive("CodeBow")
+    if (cbActive==0){
+        WinActivate, CodeBow
+    }
     PostMessage, 0x112, 0xF120,,, CodeBow,  ; 0x112 = WM_SYSCOMMAND, 0xF120 = SC_RESTORE
     
-    Sleep, 50
-    WinWaitNotActive, CodeBow
-    ;MsgBox, here
-    ;WinWaitClose, CodeBow
-    Sleep, 50
-    
-    ;bgn := SubStr(clipboard, 1, 7)
-    ;if(bgn=="{tab}`r`n")
-    ; if(StartsWith(clipboard, "{tab}`r`n"))
-    if(StartsWith(clipboard, "{tab}"))
-    {
-        RunTabSequence()
-    }
-    else
-    {
-        WinGetTitle, WinTitle, A
-        StringLeft, StartStr, WinTitle, 7
-        if(StartStr="MINGW64")
-        {
-            Send, +{insert}
-        }
-        else
-        {
-            Send, ^v
-        }
-    }
+    ;Sleep, 50
+    ;WinWaitNotActive, CodeBow
+    ;;WinWaitClose, CodeBow
+    ;Sleep, 50
+    ;
+    ;if(StartsWith(clipboard, "{tab}"))
+    ;{
+    ;    RunTabSequence()
+    ;}
+    ;else
+    ;{
+    ;    WinGetTitle, WinTitle, A
+    ;    StringLeft, StartStr, WinTitle, 7
+    ;    if(StartStr="MINGW64")
+    ;    {
+    ;        Send, +{insert}
+    ;    }
+    ;    else
+    ;    {
+    ;        Send, ^v
+    ;    }
+    ;}
 }
 
 

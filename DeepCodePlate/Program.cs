@@ -8,6 +8,8 @@ namespace CodingHood
 {
     static class Program
     {
+        private static ObjectStudy mObjStudy;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +18,12 @@ namespace CodingHood
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CodeBow());
+            var cb = new CodeBow();
+            mObjStudy = new ObjectStudy();
+            mObjStudy.StudyFormEvents(cb);
+            mObjStudy.StudyTextBox(cb.SearchBox);
+            
+            Application.Run(cb);
         }
     }
 }

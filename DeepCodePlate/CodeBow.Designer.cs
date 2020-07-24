@@ -320,7 +320,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Name = "CodeBow";
             this.Text = "CodeBow";
-            this.Activated += new System.EventHandler(this.CodeBow_Activated);
+            this.Activated += new System.EventHandler(this.FormActivated);
             this.Deactivate += new System.EventHandler(this.FormDeactivate);
             this.Shown += new System.EventHandler(this.FormShown);
             this.SizeChanged += new System.EventHandler(this.CodeBow_SizeChanged);
