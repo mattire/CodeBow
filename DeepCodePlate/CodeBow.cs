@@ -868,6 +868,7 @@ namespace CodingHood
                     saveStream.Close();
                 }
                 richTextBox2.Select();
+                this.Dispose();
             }
         }
 
