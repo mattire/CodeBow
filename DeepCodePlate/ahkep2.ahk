@@ -42,7 +42,8 @@ RunTabSequence() {
             ; addr := SubStr(arr.1, 6)
             Send, !{d}
             Sleep, 1000
-            Send, %addr%
+            ; Send, %addr%
+            Paste(addr)
             Sleep, 100
             Send, {enter}
             Sleep, 2500
@@ -66,6 +67,17 @@ RunTabSequence() {
             Send, {tab}
         }
     }
+}
+
+Paste(str)
+{
+    ;MsgBox, %str%
+    tmp := clipboard
+    clipboard:=str
+    ;MsgBox, %clipboard%
+    Send, ^v
+    Sleep, 50
+    clipboard := tmp
 }
 
 StartsWith(str, startsStr)
