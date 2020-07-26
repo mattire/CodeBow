@@ -62,6 +62,25 @@ RunTabSequence() {
             Send, %chars%
             Send, {Ctrl Up}
         }
+        else if(StartsWith(txt, "{alt}"))
+        {
+            chars := SubStr(arr[A_Index], 6)
+            Send, {Alt Down}
+            Send, %chars%
+            Send, {Alt Up}
+        }
+        else if(StartsWith(txt, "{shiftinsert}"))
+        {
+            ;chars := SubStr(arr[A_Index], 6)
+            Send, {Shift Down}
+            Send, {insert}
+            Send, {Shift Up}
+        }
+        else if(StartsWith(txt, "{send}"))
+        {
+            chars := SubStr(arr[A_Index], 7)
+            Send, %chars%
+        }
         else {
             SendRaw, %txt%
             Send, {tab}
