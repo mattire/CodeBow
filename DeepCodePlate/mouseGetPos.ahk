@@ -21,7 +21,7 @@ return
 
 ~RButton::
     CoordMode, Mouse, Screen
-    MouseGetPos, xpos, ypos 
+    MouseGetPos, xpos, ypos %clipboard%`n
     CoordMode, Caret, Screen
     clipboard = %clipboard%`n{rcoord}%xpos%,%ypos%
 return
