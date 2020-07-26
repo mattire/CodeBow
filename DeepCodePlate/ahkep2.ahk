@@ -34,8 +34,15 @@ RunTabSequence() {
             coords := SubStr(arr[A_Index], 8)
             c_arr := StrSplit(coords,",")
             MouseClick, Left, c_arr.1, c_arr.2
-            Sleep, 2500
+            Sleep, 150
         } 
+        else if(StartsWith(txt, "{rcoord}"))
+        {
+            coords := SubStr(arr[A_Index], 8)
+            c_arr := StrSplit(coords,",")
+            MouseClick, Right, c_arr.1, c_arr.2
+            Sleep, 150        
+        }
         else if(StartsWith(txt, "{adr}"))
         {
             addr := SubStr(arr[A_Index], 6)

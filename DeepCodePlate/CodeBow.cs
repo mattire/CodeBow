@@ -973,7 +973,7 @@ namespace CodingHood
 
         private void btnCoordsToClipboard_Click(object sender, EventArgs e)
         {
-            if (RunScript("mouseGetPos2.exe")) {
+            if (RunScript("mouseGetPos.exe")) {
                 Clipboard.Clear();
             }
             //if (File.Exists("mouseGetPos2.exe"))
