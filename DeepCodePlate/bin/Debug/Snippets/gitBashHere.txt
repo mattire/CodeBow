@@ -1,0 +1,7 @@
+{tab}
+{alt}d
+{ctrl}c
+{exe}C:\Program Files\Git\git-bash.exe
+{send}cd "
+{shiftinsert}
+{send}"
