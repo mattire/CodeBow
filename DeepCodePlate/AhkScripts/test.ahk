@@ -1,6 +1,12 @@
 ^r::reload
 
 #'::
+    msvsFloating := FloatingMSVisualStudioWindow()
+    MsgBox, Floating: %msvsFloating%
+return
+
+FloatingMSVisualStudioWindow()
+{
     ; FIND OUT VISUAL STUDIO FLOATING WINDOW SITUATION
     windows=""
     r=""
@@ -22,23 +28,19 @@
         id := windows%A_Index%
         WinGetTitle wt, ahk_id %id%
         if(wt!="")
-        {
-            ; nonWSTitleCount:=nonWSTitleCount+1
-            ; mvsFound := InStr, wt, %mvsTitleEnd%)
-            
+        {            
             mvsFound := InStr( wt, " - Microsoft Visual Studio")
-            MsgBox, mvsFound %mvsFound%
+            ;MsgBox, mvsFound %mvsFound%
             if(mvsFound!=0)
             {
                 mvsTitle := wt
-                MsgBox, Buuuu %mvsTitle%
+                ;MsgBox, %mvsTitle%
                 spl := StrSplit(mvsTitle, " - ")
                 for i, str in spl
                 {
-                    MsgBox, fuuuu %str% %i%
+                    ;MsgBox, %str% %i%
                     if(i==1)
                     {
-                        MsgBox, adlfkjalödfja
                         mvsTitleStart = %str%
                     }
                     else {
@@ -58,14 +60,15 @@
     
     if(mvsFound!=-1)
     {
-        MsgBox, FOUND %mvsTitleStart% 
-        MsgBox, PREV %mvsPreviousTitle%
+        ;MsgBox, FOUND %mvsTitleStart% 
+        ;MsgBox, PREV %mvsPreviousTitle%
         if(mvsTitleStart==mvsPreviousTitle){
-            MsgBox, FLOATING!!!!
+            ;MsgBox, FLOATING!!!!
+            return True
         }
-        ;MsgBox, %windows0%
-        ;MsgBox, %windows1%
     }
+    return False
+}
     
 
     ;WinGetTitle, WinTitle, A
