@@ -1,11 +1,14 @@
 ^r::reload
 
 #'::
+    ; FIND OUT VISUAL STUDIO FLOATING WINDOW SITUATION
     windows=""
     r=""
     mvsTitle=""
     mvsTitleEnd="- Microsoft Visual Studio"
     mvsTitleStart=""
+    lastWndTitle=""
+    mvsPreviousTitle=""
     WinGet windows, List
     nonWSTitleCount = 0
     mvsFound = -1
@@ -43,10 +46,12 @@
                     }
                     break
                 }
+                mvsPreviousTitle=%lastWndTitle%
                 break_spl:
             }
             nonWSTitleCount++
             r .= wt . "`n"
+            lastWndTitle=%wt%
         }
     }
     break_loop:
@@ -54,8 +59,12 @@
     if(mvsFound!=-1)
     {
         MsgBox, FOUND %mvsTitleStart% 
-        MsgBox, %windows0%
-        MsgBox, %windows1%
+        MsgBox, PREV %mvsPreviousTitle%
+        if(mvsTitleStart==mvsPreviousTitle){
+            MsgBox, FLOATING!!!!
+        }
+        ;MsgBox, %windows0%
+        ;MsgBox, %windows1%
     }
     
 

@@ -9,7 +9,7 @@ else
     ;WinGetTitle, WinTitle, ahk_class
     WinGetActiveTitle, WinTitle
     StringLeft, StartStr, WinTitle, 7
-    MsgBox, %WinTitle%
+    ;MsgBox, %WinTitle%
     if(StartStr="MINGW64")
     {
         Send, +{insert}
