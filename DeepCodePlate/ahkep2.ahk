@@ -5,9 +5,11 @@ if(StartsWith(clipboard, "{tab}"))
 }
 else
 {
-    WinGetTitle, WinTitle, A
+    ;WinGetTitle, WinTitle, A
+    ;WinGetTitle, WinTitle, ahk_class
+    WinGetActiveTitle, WinTitle
     StringLeft, StartStr, WinTitle, 7
-    
+    MsgBox, %WinTitle%
     if(StartStr="MINGW64")
     {
         Send, +{insert}
@@ -17,6 +19,7 @@ else
         endsVS := EndsWith(WinTitle, "Visual Studio")
         if(endsVS==1)
         {
+            MsgBox, esc
             Send, {Esc}
         }
         Send, ^v
