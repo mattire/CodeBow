@@ -16,10 +16,14 @@ else
     }
     else
     {
-        endsVS := EndsWith(WinTitle, "Visual Studio")
-        if(endsVS==1)
+        flMsVS := FloatingMSVisualStudioWindow()
+        ;endsVS := EndsWith(WinTitle, "Visual Studio")
+        ;endsVS := EndsWith(WinTitle, " - Microsoft Visual Studio")
+        ;MsgBox, %flMsVS%
+        if(flMsVS==1)
         {
-            MsgBox, esc
+            ;MsgBox, esc
+            ;Sleep, 10
             Send, {Esc}
         }
         Send, ^v
@@ -139,4 +143,73 @@ StartsWith(str, startsStr)
     } else {
         return false
     }
+}
+
+FloatingMSVisualStudioWindow()
+{
+    ; FIND OUT VISUAL STUDIO FLOATING WINDOW SITUATION
+    windows=""
+    r=""
+    mvsTitle=""
+    mvsTitleEnd="- Microsoft Visual Studio"
+    mvsTitleStart=""
+    mvsTitleInd=0
+    lastWndTitle=""
+    mvsPreviousTitle=""
+    WinGet windows, List
+    nonWSTitleCount = 0
+    mvsFound = -1
+    Loop %windows%
+    {
+        if(nonWSTitleCount>2)
+        {
+            ;break
+            goto break_loop
+        }
+        id := windows%A_Index%
+        WinGetTitle wt, ahk_id %id%
+        if(wt!="")
+        {            
+            mvsFound := InStr( wt, " - Microsoft Visual Studio")
+            ;MsgBox, mvsFound %mvsFound%
+            if(mvsFound!=0)
+            {
+                mvsTitle := wt
+                mvsTitleInd = %nonWSTitleCount%
+                ;mvsTitleInd = %A_Index%
+                ;MsgBox, %mvsTitle%
+                spl := StrSplit(mvsTitle, " - ")
+                for i, str in spl
+                {
+                    ;MsgBox, %str% %i%
+                    if(i==1)
+                    {
+                        mvsTitleStart = %str%
+                    }
+                    else {
+                        goto break_spl
+                    }
+                    break
+                }
+                mvsPreviousTitle=%lastWndTitle%
+                break_spl:
+            }
+            nonWSTitleCount++
+            r .= wt . "`n"
+            lastWndTitle=%wt%
+        }
+    }
+    break_loop:
+    
+    if(mvsFound!=-1)
+    {
+        ;MsgBox, FOUND %mvsTitleStart% 
+        ;MsgBox, PREV %mvsPreviousTitle%
+        ;MsgBox, %mvsTitleInd%
+        if(mvsTitleStart==mvsPreviousTitle && mvsTitleInd==1){
+            ;MsgBox, FLOATING!!!!
+            return True
+        }
+    }
+    return False
 }

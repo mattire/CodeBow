@@ -13,6 +13,7 @@ FloatingMSVisualStudioWindow()
     mvsTitle=""
     mvsTitleEnd="- Microsoft Visual Studio"
     mvsTitleStart=""
+    mvsTitleInd=0
     lastWndTitle=""
     mvsPreviousTitle=""
     WinGet windows, List
@@ -34,6 +35,8 @@ FloatingMSVisualStudioWindow()
             if(mvsFound!=0)
             {
                 mvsTitle := wt
+                mvsTitleInd = %nonWSTitleCount%
+                ;mvsTitleInd = %A_Index%
                 ;MsgBox, %mvsTitle%
                 spl := StrSplit(mvsTitle, " - ")
                 for i, str in spl
@@ -62,7 +65,8 @@ FloatingMSVisualStudioWindow()
     {
         ;MsgBox, FOUND %mvsTitleStart% 
         ;MsgBox, PREV %mvsPreviousTitle%
-        if(mvsTitleStart==mvsPreviousTitle){
+        ;MsgBox, %mvsTitleInd%
+        if(mvsTitleStart==mvsPreviousTitle && mvsTitleInd==1){
             ;MsgBox, FLOATING!!!!
             return True
         }

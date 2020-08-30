@@ -36,9 +36,12 @@ namespace CodingHood
             }
         }
 
-        public static string SubWithStartEndPoints(this string str, int start, int end) {
+        public static string SubWithStartEndPoints(this string str, int start, int end)
+        {
+            var lst = new List<string>();
             
             return str.Substring(start, end - start);
+
         }
 
         
