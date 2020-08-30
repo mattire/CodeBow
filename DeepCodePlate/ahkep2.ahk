@@ -7,12 +7,18 @@ else
 {
     WinGetTitle, WinTitle, A
     StringLeft, StartStr, WinTitle, 7
+    
     if(StartStr="MINGW64")
     {
         Send, +{insert}
     }
     else
     {
+        endsVS := EndsWith(WinTitle, "Visual Studio")
+        if(endsVS==1)
+        {
+            Send, {Esc}
+        }
         Send, ^v
     }
 }
@@ -104,6 +110,19 @@ Paste(str)
     Send, ^v
     Sleep, 50
     clipboard := tmp
+}
+
+EndsWith(str1, str2)
+{
+    len1 := StrLen(str1) 
+    len2 := StrLen(str2) 
+    if(len2<=len1)
+    {
+        EndStr = ""
+        StringRight, EndStr, str1, len2 + 1
+        return StartsWith(EndStr, str2)
+    }
+    return False
 }
 
 StartsWith(str, startsStr)
