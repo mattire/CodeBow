@@ -8,6 +8,7 @@ namespace CodingHood
 {
     static class Program
     {
+        private static CodeBow mCb;
         private static ObjectStudy mObjStudy;
 
         /// <summary>
@@ -18,12 +19,19 @@ namespace CodingHood
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var cb = new CodeBow();
+            mCb = new CodeBow();
             mObjStudy = new ObjectStudy();
-            mObjStudy.StudyFormEvents(cb);
-            mObjStudy.StudyTextBox(cb.SearchBox);
-            
-            Application.Run(cb);
+            mObjStudy.StudyFormEvents(mCb);
+            mObjStudy.StudyTextBox(mCb.SearchBox);
+
+
+            mCb.Activated += (s, e) => { mCb.ClipText = Clipboard.GetText(); };
+            Application.Run(mCb);
         }
+
+        //private static void Cb_Activated(object sender, EventArgs e)
+        //{            
+        //    mCb.ClipText = Clipboard.GetText();
+        //}
     }
 }

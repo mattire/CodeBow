@@ -179,7 +179,7 @@ namespace CodingHood
 
         public RichTextBox RichTextBox { get { return richTextBox2; } }
 
-        private string ClipText = null;
+        public string ClipText { get; set; } = null;
 
         public static CodeBow Current;
 
