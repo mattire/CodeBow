@@ -62,9 +62,15 @@ RunTabSequence() {
             ; addr := SubStr(arr.1, 6)
             Send, !{d}
             Sleep, 1000
-            ; Send, %addr%
+            ;Send, %addr%
             Paste(addr)
-            Sleep, 100
+            Sleep, 1000
+            ;tooltip, down
+            ;Send {down}
+            ;Sleep, 1000
+            ;tooltip, esc
+            ;Send {esc}
+            Sleep, 1000
             Send, {enter}
             Sleep, 2500
         }

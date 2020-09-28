@@ -23,9 +23,7 @@ namespace CodingHood
             mObjStudy = new ObjectStudy();
             mObjStudy.StudyFormEvents(mCb);
             mObjStudy.StudyTextBox(mCb.SearchBox);
-
-
-            mCb.Activated += (s, e) => { mCb.ClipText = Clipboard.GetText(); };
+            //mCb.Activated += (s, e) => { mCb.ClipText = Clipboard.GetText(); };
             Application.Run(mCb);
         }
 

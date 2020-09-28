@@ -194,13 +194,12 @@ namespace CodingHood
             SetScriptControls();
 
             SetupScriptMode();
-            
 
+            
 
             listBox2.Visible = false;
             mHighlighter = new Highlighter(this);
             mTabHandler = new TabHandler(this);
-            ClipText = Clipboard.GetText();
             richTextBox2.KeyPress += RichTextBox2_KeyPress;
             richTextBox2.SelectionChanged += RichTextBox2_SelectionChanged;
             richTextBox2.KeyDown += RichTextBox2_KeyDown1;
@@ -218,7 +217,7 @@ namespace CodingHood
 
             //FldText = "<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>\n<#*Element*#>\n#*SurroundContent*#\n<//#*Element*#>";
             //ProcessText();
-
+            
             richTextBox2.EnterPressed += RichTextBox2_EnterPressed;
         }
 
@@ -1078,6 +1077,7 @@ namespace CodingHood
         private void FormVisibleChanged(object sender, EventArgs e)
         {
             PrintMethod();
+
             System.Diagnostics.Debug.WriteLine( this.Visible);
         }
 

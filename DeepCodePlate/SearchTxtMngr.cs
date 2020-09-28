@@ -26,7 +26,10 @@ namespace CodingHood
             this.handleChosen = handleChosenOne;
             TextBox.KeyPress += TextBox_KeyPress;
             TextBox.KeyDown += TextBox_KeyDown;
-            TextBox.GotFocus += (s, e) => { ListBox.Visible = true; };
+            TextBox.GotFocus += (s, e) => {
+                ListBox.Visible = true;
+                CodeBow.Current.ClipText = Clipboard.GetText();
+            };
             TextBox.LostFocus += (s, e) => { ListBox.Visible = false; };
             TextBox.TextChanged += new System.EventHandler(this.SearchTextChanged);
             ListBox.SelectedIndexChanged += (s, e) =>
@@ -78,6 +81,7 @@ namespace CodingHood
 
             if (e.KeyCode == Keys.Enter)
             {
+                
                 string sel=null;
                 if (ListBox.SelectedItem != null)
                 {
