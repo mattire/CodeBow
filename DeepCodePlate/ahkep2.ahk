@@ -112,6 +112,7 @@ RunTabSequence() {
             Send, {tab}
         }
     }
+    clipboard:=
 }
 
 Paste(str)
