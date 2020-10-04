@@ -51,6 +51,8 @@
             this.quickPanel1 = new System.Windows.Forms.Panel();
             this.lblQuick = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.chkFullscreen = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.richTextBox2 = new CodingHood.CodeRichTextBox();
             this.panelEdit.SuspendLayout();
             this.quickPanel1.SuspendLayout();
@@ -141,6 +143,8 @@
             // 
             this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelEdit.Controls.Add(this.button2);
+            this.panelEdit.Controls.Add(this.chkFullscreen);
             this.panelEdit.Controls.Add(this.btnContentTag);
             this.panelEdit.Controls.Add(this.btnCoordsToClipboard);
             this.panelEdit.Controls.Add(this.btnToPswd);
@@ -290,6 +294,28 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // chkFullscreen
+            // 
+            this.chkFullscreen.AutoSize = true;
+            this.chkFullscreen.Location = new System.Drawing.Point(4, 294);
+            this.chkFullscreen.Name = "chkFullscreen";
+            this.chkFullscreen.Size = new System.Drawing.Size(95, 21);
+            this.chkFullscreen.TabIndex = 19;
+            this.chkFullscreen.Text = "Fullscreen";
+            this.chkFullscreen.UseVisualStyleBackColor = true;
+            this.chkFullscreen.Visible = false;
+            this.chkFullscreen.CheckedChanged += new System.EventHandler(this.chkFullscreen_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(0, 322);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 32);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "SaveSize";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // richTextBox2
             // 
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -326,6 +352,7 @@
             this.SizeChanged += new System.EventHandler(this.CodeBow_SizeChanged);
             this.VisibleChanged += new System.EventHandler(this.FormVisibleChanged);
             this.panelEdit.ResumeLayout(false);
+            this.panelEdit.PerformLayout();
             this.quickPanel1.ResumeLayout(false);
             this.quickPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -358,6 +385,8 @@
         private System.Windows.Forms.Panel quickPanel1;
         private System.Windows.Forms.Label lblQuick;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.CheckBox chkFullscreen;
+        private System.Windows.Forms.Button button2;
     }
 }
 

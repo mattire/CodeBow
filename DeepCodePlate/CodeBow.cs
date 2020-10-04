@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -1084,6 +1085,11 @@ namespace CodingHood
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
+            string sw = GetConfig("Width");
+            string sh = GetConfig("Height");
+            int iw = int.Parse(sw);
+            int ih = int.Parse(sh);
+            this.Size = new System.Drawing.Size(iw, ih);
             textBox1.Select();
         }
 
@@ -1169,5 +1175,57 @@ namespace CodingHood
                 return Params;
             }
         }
+
+        public static bool MFullSceen;
+        private void chkFullscreen_CheckedChanged(object sender, EventArgs e)
+        {
+            MFullSceen = chkFullscreen.Checked;
+            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None); 
+            var sets = config.AppSettings.Settings;
+            sets.Remove("Fullscreen");
+            sets.Add("Fullscreen", MFullSceen.ToString());
+            
+
+            config.Save();
+            if (MFullSceen)
+            {
+                //this.FormBorderStyle = FormBorderStyle.FixedSingle;
+                //FormBorderStyle = FormBorderStyle.FixedToolWindow;
+                //this.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+                WindowState = FormWindowState.Maximized;
+                FormBorderStyle = FormBorderStyle.None;
+            }
+            else {
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        public string FullScreen
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["Fullscreen"];
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var w = this.Size.Width ;
+            var h = this.Size.Height;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var sets = config.AppSettings.Settings;
+            sets.Remove("Width");
+            sets.Add("Width", w.ToString());
+            sets.Remove("Height");
+            sets.Add("Height", h.ToString());
+            config.Save();
+        }
+
+        public string GetConfig(string name)
+        {
+                return ConfigurationManager.AppSettings[name];
+        }
+
     }
 }
