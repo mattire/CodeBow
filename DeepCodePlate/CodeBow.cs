@@ -777,7 +777,7 @@ namespace CodingHood
             } }
 
         public List<Field> OriginalFields { get; private set; }
-        public TabHandler MTabHandler { get => mTabHandler; set => mTabHandler = value; }
+        public TabHandler MTabHandler { get { return mTabHandler; } set { mTabHandler = value; } }
 
         public string GetOriginalFieldName(FieldPlace fieldPlace)
         {
@@ -994,15 +994,15 @@ namespace CodingHood
 
         private void btnQuickSave_Click(object sender, EventArgs e)
         {
-            var ac = new AhkCtrlCoords();
-            ac.Process(richTextBox1.Text, richTextBox2.Text, this.FieldPlaces);
-
-
-            string selItem = (string)comboBox1.SelectedItem;
-            if (!string.IsNullOrWhiteSpace(selItem)) {
-                var fn = selItem + ".txt";
-                File.WriteAllText(fn, richTextBox2.Text);
-            }
+            //var ac = new AhkCtrlCoords();
+            //ac.Process(richTextBox1.Text, richTextBox2.Text, this.FieldPlaces);
+            //
+            //
+            //string selItem = (string)comboBox1.SelectedItem;
+            //if (!string.IsNullOrWhiteSpace(selItem)) {
+            //    var fn = selItem + ".txt";
+            //    File.WriteAllText(fn, richTextBox2.Text);
+            //}
         }
 
         private void btnQuickRun_Click(object sender, EventArgs e)
@@ -1087,9 +1087,11 @@ namespace CodingHood
             base.OnActivated(e);
             string sw = GetConfig("Width");
             string sh = GetConfig("Height");
-            int iw = int.Parse(sw);
-            int ih = int.Parse(sh);
-            this.Size = new System.Drawing.Size(iw, ih);
+            if (sw != null && sh != null) {
+                int iw = int.Parse(sw);
+                int ih = int.Parse(sh);
+                this.Size = new System.Drawing.Size(iw, ih);
+            }
             textBox1.Select();
         }
 
