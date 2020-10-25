@@ -736,6 +736,16 @@ namespace CodingHood
             //});
         }
 
+        private void ScriptEndActionsClip(string txt)
+        {
+            Clipboard.SetText(txt);
+            FieldHistoryMngr.Instance.StoreValues();
+            this.WindowState = FormWindowState.Minimized;
+            WindowMode = WindowModeType.Finished;
+            System.Diagnostics.Debug.WriteLine("SendToBack");
+            this.SendToBack();
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Clipboard.Clear();
@@ -1229,5 +1239,42 @@ namespace CodingHood
                 return ConfigurationManager.AppSettings[name];
         }
 
+        private void btn2Clipboard_Click(object sender, EventArgs e)
+        {
+            var txt = richTextBox2.Text;
+            bool res = PswdFieldManager.Instance.ContainsPswds(txt);
+            bool ps = PswdFieldManager.Instance.PinSet();
+            if (res)
+            {
+                Action<string> EndStuff = (str) =>
+                {
+                    str = PswdFieldManager.Instance.DecryptPassWordFields(str);
+                    str = PswdFieldManager.Instance.CleanPswdTags(str);
+                    ScriptEndActionsClip(str);
+                };
+
+                if (ps)
+                {
+                    var inp = new Input("Enter your pin:", (result) =>
+                    {
+                        if (PswdFieldManager.Instance.CheckPin(result))
+                        {
+                            EndStuff(txt);
+                        }
+                    });
+                    inp.TextBox.PasswordChar = '*';
+                    inp.Show();
+                }
+                else
+                {
+                    EndStuff(txt);
+                }
+            }
+            else
+            {
+                ScriptEndActionsClip(txt);
+            }
+
+        }
     }
 }

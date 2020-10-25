@@ -33,11 +33,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPaste = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.btnEdit = new System.Windows.Forms.Button();
             this.panelEdit = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.chkFullscreen = new System.Windows.Forms.CheckBox();
             this.btnContentTag = new System.Windows.Forms.Button();
             this.btnCoordsToClipboard = new System.Windows.Forms.Button();
             this.btnToPswd = new System.Windows.Forms.Button();
@@ -51,9 +53,8 @@
             this.quickPanel1 = new System.Windows.Forms.Panel();
             this.lblQuick = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.chkFullscreen = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.richTextBox2 = new CodingHood.CodeRichTextBox();
+            this.btn2Clipboard = new System.Windows.Forms.Button();
             this.panelEdit.SuspendLayout();
             this.quickPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -98,21 +99,21 @@
             this.listBox1.Size = new System.Drawing.Size(153, 372);
             this.listBox1.TabIndex = 8;
             // 
-            // button1
+            // btnPaste
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(193, 413);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 28);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "&Ok";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Ok_Click);
+            this.btnPaste.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPaste.Location = new System.Drawing.Point(193, 413);
+            this.btnPaste.Name = "btnPaste";
+            this.btnPaste.Size = new System.Drawing.Size(75, 28);
+            this.btnPaste.TabIndex = 9;
+            this.btnPaste.Text = "P&aste";
+            this.btnPaste.UseVisualStyleBackColor = true;
+            this.btnPaste.Click += new System.EventHandler(this.button1_Ok_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.Location = new System.Drawing.Point(273, 413);
+            this.btnCancel.Location = new System.Drawing.Point(350, 413);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 10;
@@ -156,6 +157,28 @@
             this.panelEdit.Name = "panelEdit";
             this.panelEdit.Size = new System.Drawing.Size(99, 392);
             this.panelEdit.TabIndex = 13;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(0, 322);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 32);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "SaveSize";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // chkFullscreen
+            // 
+            this.chkFullscreen.AutoSize = true;
+            this.chkFullscreen.Location = new System.Drawing.Point(4, 294);
+            this.chkFullscreen.Name = "chkFullscreen";
+            this.chkFullscreen.Size = new System.Drawing.Size(95, 21);
+            this.chkFullscreen.TabIndex = 19;
+            this.chkFullscreen.Text = "Fullscreen";
+            this.chkFullscreen.UseVisualStyleBackColor = true;
+            this.chkFullscreen.Visible = false;
+            this.chkFullscreen.CheckedChanged += new System.EventHandler(this.chkFullscreen_CheckedChanged);
             // 
             // btnContentTag
             // 
@@ -294,28 +317,6 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
-            // chkFullscreen
-            // 
-            this.chkFullscreen.AutoSize = true;
-            this.chkFullscreen.Location = new System.Drawing.Point(4, 294);
-            this.chkFullscreen.Name = "chkFullscreen";
-            this.chkFullscreen.Size = new System.Drawing.Size(95, 21);
-            this.chkFullscreen.TabIndex = 19;
-            this.chkFullscreen.Text = "Fullscreen";
-            this.chkFullscreen.UseVisualStyleBackColor = true;
-            this.chkFullscreen.Visible = false;
-            this.chkFullscreen.CheckedChanged += new System.EventHandler(this.chkFullscreen_CheckedChanged);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(0, 322);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 32);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "SaveSize";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // richTextBox2
             // 
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -329,16 +330,27 @@
             this.richTextBox2.Text = "";
             this.richTextBox2.Enter += new System.EventHandler(this.RichTextBoxEnter);
             // 
+            // btn2Clipboard
+            // 
+            this.btn2Clipboard.Location = new System.Drawing.Point(269, 413);
+            this.btn2Clipboard.Name = "btn2Clipboard";
+            this.btn2Clipboard.Size = new System.Drawing.Size(75, 28);
+            this.btn2Clipboard.TabIndex = 20;
+            this.btn2Clipboard.Text = "&2Clipb";
+            this.btn2Clipboard.UseVisualStyleBackColor = true;
+            this.btn2Clipboard.Click += new System.EventHandler(this.btn2Clipboard_Click);
+            // 
             // CodeBow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 453);
+            this.Controls.Add(this.btn2Clipboard);
             this.Controls.Add(this.quickPanel1);
             this.Controls.Add(this.panelEdit);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPaste);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
@@ -367,7 +379,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPaste;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button btnEdit;
@@ -387,6 +399,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.CheckBox chkFullscreen;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn2Clipboard;
     }
 }
 
