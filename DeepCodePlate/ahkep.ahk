@@ -32,7 +32,7 @@ return
 
 RunSnips(){
     Send, ^c
-    ClipWait, 10
+    ClipWait, 0.1
     ;SetTitleMatchMode, 2
     
     IfWinNotExist, CodeBow
