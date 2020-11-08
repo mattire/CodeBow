@@ -714,32 +714,41 @@ namespace CodingHood
         }
 
         private void ScriptEndActions(string txt) {
-            Clipboard.SetText(txt);
-            FieldHistoryMngr.Instance.StoreValues();
-            //this.Close();
-            this.WindowState = FormWindowState.Minimized;
-            //WindowMode = WindowModeType.OkCancelSelected;
-            RunScript("ahkep2.exe");
-
-            //textBox1.Select();
-            //this.Activate();
-            WindowMode = WindowModeType.Finished;
-
-            System.Diagnostics.Debug.WriteLine("SendToBack");
-            this.SendToBack();
-
-            //Task.Run(async () =>
-            //{
-            //    await Task.Delay(2000);
-            //    //WindowMode = WindowModeType.Finished;
-            //    //textBox1.Focus();
-            //});
+            if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
+            else {
+                Clipboard.SetText(txt);
+                FieldHistoryMngr.Instance.StoreValues();
+                this.WindowState = FormWindowState.Minimized;
+                //WindowMode = WindowModeType.OkCancelSelected;
+                RunScript("ahkep2.exe");
+                WindowMode = WindowModeType.Finished;
+                System.Diagnostics.Debug.WriteLine("SendToBack");
+                this.SendToBack();
+            }
         }
 
         private void ScriptEndActionsClip(string txt)
         {
-            Clipboard.SetText(txt);
-            FieldHistoryMngr.Instance.StoreValues();
+            if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
+            else
+            {
+                Clipboard.SetText(txt);
+                FieldHistoryMngr.Instance.StoreValues();
+                this.WindowState = FormWindowState.Minimized;
+                WindowMode = WindowModeType.Finished;
+                System.Diagnostics.Debug.WriteLine("SendToBack");
+                this.SendToBack();
+            }
+        }
+
+        private void PasteSeq(string txt) {
+            var spl = txt.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            spl = spl.Skip(1).ToArray();
+            //Clipboard.Clear();
+            var strJoin = String.Join("\r\n", spl);
+            strJoin = strJoin != null ? strJoin : txt;
+            Clipboard.SetText(strJoin);
+            RunScript("ahkSendSeq.exe");
             this.WindowState = FormWindowState.Minimized;
             WindowMode = WindowModeType.Finished;
             System.Diagnostics.Debug.WriteLine("SendToBack");

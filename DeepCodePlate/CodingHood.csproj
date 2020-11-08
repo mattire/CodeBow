@@ -104,6 +104,9 @@
     <None Include="ahkep2.ahk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="ahkSendSeq.ahk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="mouseGetPos.ahk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -135,5 +138,6 @@
     <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep.ahk /out $(OutDir)\ahkep.exe" />
     <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep2.ahk /out $(OutDir)\ahkep2.exe" />
     <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\mouseGetPos.ahk /out $(OutDir)\mouseGetPos.exe" />
+    <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkSendSeq.ahk /out $(OutDir)\ahkSendSeq.exe" />
   </Target>
 </Project>

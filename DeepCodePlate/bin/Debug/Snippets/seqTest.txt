@@ -1,0 +1,5 @@
+{pasteseq}
+test
+string
+to
+split
