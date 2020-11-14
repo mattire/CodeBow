@@ -23,7 +23,7 @@ namespace CodingHood
          *  CODECYCLER
          *  =============
          * / 
-        */
+         */
 
         private const string SnippetFld = ".\\Snippets";
 
@@ -247,10 +247,15 @@ namespace CodingHood
         private void PreviewSnippet(string sel)
         {
             var fn = sel + ".txt";
+            var fn2 = sel + ".ahk"; // check of ahk file
             CurrentFileName = fn;
-            SetupScriptMode();
-                 
-            var path = Path.Combine(SnippetFld, fn);
+            SetupScriptMode();                 
+            var path1 = Path.Combine(SnippetFld, fn);
+            var path2 = Path.Combine(SnippetFld, fn2);
+            string path = "";
+            if (File.Exists(path1)) { path = path1; } else
+            if (File.Exists(path2)) { path = path2; }
+
             var txt = File.ReadAllText(path);
             FldText = HandleLineFeeds(txt);
             ProcessText();
@@ -715,6 +720,7 @@ namespace CodingHood
 
         private void ScriptEndActions(string txt) {
             if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
+            else if (txt.StartsWith(";{ahk}") || txt.StartsWith("{ahk}")) { PasteSeq(txt); }
             else {
                 Clipboard.SetText(txt);
                 FieldHistoryMngr.Instance.StoreValues();

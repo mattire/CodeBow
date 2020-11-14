@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AhkCtrlCoords.cs" />
+    <Compile Include="AhkRunner.cs" />
     <Compile Include="CodeBowState.cs" />
     <Compile Include="Highlighter.cs" />
     <Compile Include="CodeBow.cs">

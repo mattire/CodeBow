@@ -65,6 +65,7 @@ namespace CodingHood
 
                 SuggestBox.Location = p1;
                 SuggestBox.Visible = true;
+                SuggestBox.BringToFront();
             }
         }
 
@@ -92,6 +93,7 @@ namespace CodingHood
 
         internal void HideSuggestions() {
             SuggestBox.Visible = false;
+            SuggestBox.SendToBack();
         }
 
         internal void HandleUpKey() {
