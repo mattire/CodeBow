@@ -97,7 +97,7 @@ namespace CodingHood
                     fldValue = value;
                     if (CodeBow.Current.SnippetInited) {
                         if (CodeBow.Current.CurrentFieldPlace == this) {
-                            if (fldValue.Length >= 3) {                            
+                            if (fldValue.Length >= 3) {
                                 SuggestionMngr.Instance.CheckHistoryEntries(this);
                             }
                         }
@@ -196,7 +196,7 @@ namespace CodingHood
 
             SetupScriptMode();
 
-            
+
 
             listBox2.Visible = false;
             mHighlighter = new Highlighter(this);
@@ -207,7 +207,7 @@ namespace CodingHood
             richTextBox1.KeyDown += RichTextBox1_KeyDown;
 
             mSearchTxtMngr =
-                new 
+                new
                 SearchTxtMngr(textBox1, listBox1, Snippets,
                     listBoxSelectionChangeHandling: (sel) => { PreviewSnippet(sel); },
                     handleChosenOne: (sel) => {
@@ -218,7 +218,7 @@ namespace CodingHood
 
             //FldText = "<#*Element*#>\n#*SurroundContent*#\n</#*Element*#>\n<#*Element*#>\n#*SurroundContent*#\n<//#*Element*#>";
             //ProcessText();
-            
+
             richTextBox2.EnterPressed += RichTextBox2_EnterPressed;
         }
 
@@ -244,19 +244,21 @@ namespace CodingHood
 
         public string CurrentFileName { get; set; }
 
+        public string CurrentFilePath { get; set; }
+
         private void PreviewSnippet(string sel)
         {
             var fn = sel + ".txt";
             var fn2 = sel + ".ahk"; // check of ahk file
             CurrentFileName = fn;
-            SetupScriptMode();                 
+            SetupScriptMode();
             var path1 = Path.Combine(SnippetFld, fn);
             var path2 = Path.Combine(SnippetFld, fn2);
-            string path = "";
-            if (File.Exists(path1)) { path = path1; } else
-            if (File.Exists(path2)) { path = path2; }
+            CurrentFilePath = "";
+            if (File.Exists(path1)) { CurrentFilePath = path1; } else
+            if (File.Exists(path2)) { CurrentFilePath = path2; }
 
-            var txt = File.ReadAllText(path);
+            var txt = File.ReadAllText(CurrentFilePath);
             FldText = HandleLineFeeds(txt);
             ProcessText();
             OriginalFields = Fields.Select(f => new Field() { Name = f.Name, Value = f.Value }).ToList();
@@ -332,7 +334,7 @@ namespace CodingHood
         private void HandleCopyPaste(KeyEventArgs e)
         {
             var fp = CurrentFieldPlace;
-            
+
             if (fp != null)
             {
                 var ind = fp.FieldPlaceInd;
@@ -340,7 +342,7 @@ namespace CodingHood
                 //fp.Paste(Clipboard.GetText());
                 var txt = Clipboard.GetText();
                 int rbStart = richTextBox2.SelectionStart;
-                int rbLen   = richTextBox2.SelectionLength;
+                int rbLen = richTextBox2.SelectionLength;
 
                 var fld = Fields.FirstOrDefault(f => f.Name == fp.FldName);
                 var fldPlaces = FieldPlaces.Where(fpl => fpl.FldName == fld.Name).ToList();
@@ -385,7 +387,7 @@ namespace CodingHood
             var sgstMngr = SuggestionMngr.Instance;
             if (sgstMngr.SuggestBox.Visible) {
                 //System.Diagnostics.Debug.WriteLine(e.KeyChar=='\r');
-                if(e.KeyChar == '\r' || e.KeyChar == '\n'){
+                if (e.KeyChar == '\r' || e.KeyChar == '\n') {
                     sgstMngr.HandleEnterKey();
                     e.Handled = true;
                     return;
@@ -395,7 +397,7 @@ namespace CodingHood
             List<char> skipKeys = new List<char> { '\u001b', '\u0016', '\u0003' };
 
             if (skipKeys.Contains(e.KeyChar)) {
-                e.Handled= true;
+                e.Handled = true;
                 return;
             }
 
@@ -421,7 +423,7 @@ namespace CodingHood
                 {
                     Process(fp, selStart, e.KeyChar, richTextBox2.Text);
                     RewriteFieldPlaces();
-                    
+
 
                     if (e.KeyChar != '\b')
                     {
@@ -441,7 +443,7 @@ namespace CodingHood
                 {
                     Process(fp, selStart, selLen, e.KeyChar, richTextBox2.Text);
                     RewriteFieldPlaces();
-                    
+
 
                     if (e.KeyChar != '\b')
                     {
@@ -711,7 +713,7 @@ namespace CodingHood
                 }
                 else {
                     EndStuff(txt);
-                }   
+                }
             }
             else {
                 ScriptEndActions(txt);
@@ -720,7 +722,7 @@ namespace CodingHood
 
         private void ScriptEndActions(string txt) {
             if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
-            else if (txt.StartsWith(";{ahk}") || txt.StartsWith("{ahk}")) { PasteSeq(txt); }
+            else if (txt.StartsWith(";{ahk}") || txt.StartsWith("{ahk}")) { AhkRunner.Instance.RunAhkScript(CurrentFilePath); }
             else {
                 Clipboard.SetText(txt);
                 FieldHistoryMngr.Instance.StoreValues();
@@ -736,6 +738,7 @@ namespace CodingHood
         private void ScriptEndActionsClip(string txt)
         {
             if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
+            else if (txt.StartsWith(";{ahk}") || txt.StartsWith("{ahk}")) { AhkRunner.Instance.RunAhkScript(CurrentFilePath); }
             else
             {
                 Clipboard.SetText(txt);
@@ -755,6 +758,14 @@ namespace CodingHood
             strJoin = strJoin != null ? strJoin : txt;
             Clipboard.SetText(strJoin);
             RunScript("ahkSendSeq.exe");
+            CloseWindow();
+            //this.WindowState = FormWindowState.Minimized;
+            //WindowMode = WindowModeType.Finished;
+            //System.Diagnostics.Debug.WriteLine("SendToBack");
+            //this.SendToBack();
+        }
+
+        public void CloseWindow() {
             this.WindowState = FormWindowState.Minimized;
             WindowMode = WindowModeType.Finished;
             System.Diagnostics.Debug.WriteLine("SendToBack");
