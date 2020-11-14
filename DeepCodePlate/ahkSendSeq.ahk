@@ -12,8 +12,10 @@ ind:=1
 ^v::
     ;MsgBox, %ind%
     current = % spl[ind]
-    Send, %current%
-    Send, {Esc}
+    clipboard := current
+    ;Send, %current%
+    Send, ^v
+    ;Send, {Esc}
     ind:=ind+1
     if(ind==len)
     {

@@ -132,13 +132,13 @@
     </PropertyGroup>
   </Target>
   <Target Name="CompileAhk" AfterTargets="Build">
-    <!-- <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep.ahk /out $(OutDir)\ahkep.exe" /> -->
-    <!-- <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep2.ahk /out $(OutDir)\ahkep2.exe" /> -->
-    <!-- <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\mouseGetPos.ahk /out $(OutDir)\mouseGetPos.exe" /> -->
-    <!-- <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkSendSeq.ahk /out $(OutDir)\ahkSendSeq.exe" /> -->
-    <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep.ahk /out $(OutDir)\ahkep.exe" />
-    <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep2.ahk /out $(OutDir)\ahkep2.exe" />
-    <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\mouseGetPos.ahk /out $(OutDir)\mouseGetPos.exe" />
-    <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkSendSeq.ahk /out $(OutDir)\ahkSendSeq.exe" />
+    <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep.ahk /out $(OutDir)\ahkep.exe" />
+    <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep2.ahk /out $(OutDir)\ahkep2.exe" />
+    <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\mouseGetPos.ahk /out $(OutDir)\mouseGetPos.exe" />
+    <Exec Command="&quot;C:\Programs\AutoHotkey_1.1.25.02\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkSendSeq.ahk /out $(OutDir)\ahkSendSeq.exe" />
+    <!-- <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep.ahk /out $(OutDir)\ahkep.exe" /> -->
+    <!-- <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkep2.ahk /out $(OutDir)\ahkep2.exe" /> -->
+    <!-- <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\mouseGetPos.ahk /out $(OutDir)\mouseGetPos.exe" /> -->
+    <!-- <Exec Command="&quot;C:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe&quot; /in $(OutDir)\ahkSendSeq.ahk /out $(OutDir)\ahkSendSeq.exe" /> -->
   </Target>
 </Project>
