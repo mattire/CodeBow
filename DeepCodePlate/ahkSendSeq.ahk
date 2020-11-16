@@ -10,6 +10,7 @@ len := spl.MaxIndex() + 1
 ind:=1
 
 ^v::
+	Suspend, on
     ;MsgBox, %ind%
     current = % spl[ind]
     clipboard := current
@@ -21,6 +22,7 @@ ind:=1
     {
         ind:=1
     }
+	Suspend, off
 return
 
 
