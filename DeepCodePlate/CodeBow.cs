@@ -722,6 +722,7 @@ namespace CodingHood
 
         private void ScriptEndActions(string txt) {
             if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
+            else if (txt.StartsWith("{clip}")) { ClipRunner.Instance.Script2Clipboard(txt); }
             else if (txt.StartsWith(";{ahk}") || txt.StartsWith("{ahk}")) { AhkRunner.Instance.RunAhkScript(CurrentFilePath); }
             else {
                 Clipboard.SetText(txt);
@@ -738,6 +739,7 @@ namespace CodingHood
         private void ScriptEndActionsClip(string txt)
         {
             if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
+            else if (txt.StartsWith("{clip}")) { ClipRunner.Instance.Script2Clipboard(txt); }
             else if (txt.StartsWith(";{ahk}") || txt.StartsWith("{ahk}")) { AhkRunner.Instance.RunAhkScript(CurrentFilePath); }
             else
             {
@@ -757,6 +759,7 @@ namespace CodingHood
             var strJoin = String.Join("\r\n", spl);
             strJoin = strJoin != null ? strJoin : txt;
             Clipboard.SetText(strJoin);
+            Task.Delay(100);
             RunScript("ahkSendSeq.exe");
             CloseWindow();
             //this.WindowState = FormWindowState.Minimized;
