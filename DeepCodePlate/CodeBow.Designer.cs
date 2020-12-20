@@ -332,6 +332,7 @@
             // 
             // btn2Clipboard
             // 
+            this.btn2Clipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn2Clipboard.Location = new System.Drawing.Point(269, 413);
             this.btn2Clipboard.Name = "btn2Clipboard";
             this.btn2Clipboard.Size = new System.Drawing.Size(75, 28);
