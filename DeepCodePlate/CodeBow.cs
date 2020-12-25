@@ -169,6 +169,7 @@ namespace CodingHood
         public List<Field> Fields { get; set; }
 
         private SearchTxtMngr mSearchTxtMngr;
+        private ClipFormat.ClipFormatMngr mClipFormatMngr;
 
         public string FldText { get; set; }
         public string OutputText { get; set; }
@@ -197,7 +198,6 @@ namespace CodingHood
             SetupScriptMode();
 
 
-
             listBox2.Visible = false;
             mHighlighter = new Highlighter(this);
             mTabHandler = new TabHandler(this);
@@ -205,6 +205,8 @@ namespace CodingHood
             richTextBox2.SelectionChanged += RichTextBox2_SelectionChanged;
             richTextBox2.KeyDown += RichTextBox2_KeyDown1;
             richTextBox1.KeyDown += RichTextBox1_KeyDown;
+
+            mClipFormatMngr = new ClipFormat.ClipFormatMngr();
 
             mSearchTxtMngr =
                 new
@@ -246,6 +248,27 @@ namespace CodingHood
 
         public string CurrentFilePath { get; set; }
 
+        private bool FormatterTxt(string txt) {
+            var formatter = mClipFormatMngr.TryFindClipFormatter(txt);
+            if (formatter != null)
+            {
+                try
+                {
+                    var clip = Clipboard.GetText();
+                    //formatter.Valid(clip);
+                    var formatTxt = formatter.Format(clip);
+                    richTextBox2.Text = formatTxt;
+                    richTextBox1.Text = formatTxt;
+                    return true;
+                }
+                catch (Exception exp)
+                {
+                    System.Diagnostics.Debug.WriteLine(exp.ToString());
+                }
+            }
+            return false;
+        }
+
         private void PreviewSnippet(string sel)
         {
             var fn = sel + ".txt";
@@ -259,6 +282,9 @@ namespace CodingHood
             if (File.Exists(path2)) { CurrentFilePath = path2; }
 
             var txt = File.ReadAllText(CurrentFilePath);
+
+            if (FormatterTxt(txt)) { return; }
+
             FldText = HandleLineFeeds(txt);
             ProcessText();
             OriginalFields = Fields.Select(f => new Field() { Name = f.Name, Value = f.Value }).ToList();

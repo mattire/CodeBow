@@ -56,6 +56,9 @@
   <ItemGroup>
     <Compile Include="AhkCtrlCoords.cs" />
     <Compile Include="AhkRunner.cs" />
+    <Compile Include="ClipFormat\axmlProcess\Axml2Fields.cs" />
+    <Compile Include="ClipFormat\ClipFormatMngr.cs" />
+    <Compile Include="ClipFormat\IClipFormatter.cs" />
     <Compile Include="ClipRunner.cs" />
     <Compile Include="CodeBowState.cs" />
     <Compile Include="Highlighter.cs" />
@@ -128,6 +131,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
