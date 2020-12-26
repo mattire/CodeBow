@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,27 @@ namespace CodingHood.ClipFormat.axmlProcess
         //    return Format(clip);
         //}
 
+        private string IfPathConvert2File(string str)
+        {
+            if (!str.StartsWith("\"")) { return str; }
+            if (str.Contains('\r') || str.Contains('\n')) { return str; }
+            try
+            {
+                str = str.Replace("\"", "");
+                var p = Path.GetFullPath(str);
+                str = File.ReadAllText(p);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("not path or invalid path");
+            }
+            return str;
+        }
+
         public string Format(string str)
         {
+            str = IfPathConvert2File(str);
+
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(str);
             StringBuilder sb = new StringBuilder();
