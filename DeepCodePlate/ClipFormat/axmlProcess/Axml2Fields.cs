@@ -42,15 +42,18 @@ namespace CodingHood.ClipFormat.axmlProcess
 
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(str);
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sbFinds = new StringBuilder();
+            StringBuilder sbProps = new StringBuilder();
 
             Action<XmlNode> AppendFindStrs = (xn) => {
                 //xn.Name
                 var idVal = GetIdValue(xn);
                 if (idVal != null) {
                     //varName = view.FindViewById<Type>(Resource.Id.resourceId);
+                    //public ProgressBar ProgressBarCalibration { get; set; }
                     string varName = UnderScores2CamelCase(idVal);
-                    sb.Append($"var {varName} = view.FindViewById<{xn.Name}>(Resource.Id.{idVal});\n");
+                    sbFinds.Append($"{varName} = view.FindViewById<{xn.Name}>(Resource.Id.{idVal});\n");
+                    sbProps.Append($"public {xn.Name} {varName} {{ get; set; }}\n");
                 }
             };
 
@@ -59,7 +62,7 @@ namespace CodingHood.ClipFormat.axmlProcess
                 RecurNodes(xn, AppendFindStrs);
             }
 
-            return sb.ToString();
+            return sbProps.ToString() + sbFinds.ToString();
         }
 
         string UnderScores2CamelCase(string txt)
