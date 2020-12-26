@@ -259,6 +259,7 @@ namespace CodingHood
                     var formatTxt = formatter.Format(clip);
                     richTextBox2.Text = formatTxt;
                     richTextBox1.Text = formatTxt;
+                    Fields = new List<Field>();
                     return true;
                 }
                 catch (Exception exp)
