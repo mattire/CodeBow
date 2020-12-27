@@ -260,6 +260,7 @@ namespace CodingHood
                     richTextBox2.Text = formatTxt;
                     richTextBox1.Text = formatTxt;
                     Fields = new List<Field>();
+                    FieldPlaces = new List<FieldPlace>();
                     return true;
                 }
                 catch (Exception exp)
