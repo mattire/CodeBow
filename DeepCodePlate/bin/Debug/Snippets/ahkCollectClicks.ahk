@@ -1,6 +1,6 @@
 ;{ahk}
 
-clipboard = `;{ahk}`n`n^f1::
+clipboard = `;{ahk}`n`nCoordMode, Mouse, Screen`n`n^f1::
 
 ~LButton::
     CoordMode, Mouse, Screen
@@ -26,3 +26,5 @@ return
     clipboard = %clipboard%`nreturn
     ExitApp
 return
+	MouseClick,left,751,546
+	Sleep, 20
