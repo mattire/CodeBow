@@ -30,6 +30,14 @@ return
     ;f.Write(content)
     f.Write(clipboard)
     f.Close()
-    Run %fn%
+    ;MsgBox, %A_AHKPath% %fn%
+    ;MsgBox, %A_AHKPath% `"%fn%`"
+    ;MsgBox, %A_AHKPath% "%fn%"
+    ;MsgBox, %A_AHKPath% ahkTemp.ahk
+    Run %A_AHKPath% "%fn%"
+    ;Run %fn%
+    ;Run %A_AHKPath% %fn%
+    ;Run "C:\Program Files\AutoHotkey\AutoHotkeyU64.exe" %fn%
+    ;Run "C:\Programs\AutoHotkey_1.1.25.02\AutoHotkeyU64.exe" %fn%
     ExitApp
 return
