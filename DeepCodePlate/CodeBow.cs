@@ -752,6 +752,7 @@ namespace CodingHood
             if (txt.StartsWith("{pasteseq}")) { PasteSeq(txt); }
             else if (txt.StartsWith("{clip}")) { ClipRunner.Instance.Script2Clipboard(txt); }
             else if (txt.StartsWith(";{ahk}") || txt.StartsWith("{ahk}")) { AhkRunner.Instance.RunAhkScript(CurrentFilePath); }
+            else if (txt.StartsWith(";{ahk2}") || txt.StartsWith("{ahk2}")) { AhkRunner.Instance.RunAhkScript(txt, CurrentFilePath); }
             else {
                 Clipboard.SetText(txt);
                 FieldHistoryMngr.Instance.StoreValues();

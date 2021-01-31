@@ -40,5 +40,17 @@ namespace CodingHood
             CodeBow.Current.CloseWindow();
         }
 
+        internal void RunAhkScript(string txt, string scriptPath)
+        {
+            // write temp file and run it
+            var fp = System.IO.Path.GetDirectoryName(scriptPath) +
+                System.IO.Path.DirectorySeparatorChar + "ahkTemprun.ahk";
+            System.IO.File.WriteAllText(fp, txt);
+            System.Diagnostics.Process.Start(
+                AhkPath,
+                fp);
+
+            CodeBow.Current.CloseWindow();
+        }
     }
 }
