@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -58,6 +61,7 @@
     <Compile Include="AhkRunner.cs" />
     <Compile Include="ClipFormat\axmlProcess\Axml2Fields.cs" />
     <Compile Include="ClipFormat\ClipFormatMngr.cs" />
+    <Compile Include="ClipFormat\Generic\JsonPrettyPrint.cs" />
     <Compile Include="ClipFormat\IClipFormatter.cs" />
     <Compile Include="ClipRunner.cs" />
     <Compile Include="CodeBowState.cs" />
