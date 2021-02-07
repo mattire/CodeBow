@@ -1,21 +1,19 @@
 ;{ahk2}
 
-clipboard = `;{ahk}`n`nCoordMode, Mouse, Window`n`nSetDefaultMouseSpeed, #*2*#`n`n`n`n^f1::
+clipboard = `;{ahk}`n`nCoordMode, Mouse, Window`n`nSetDefaultMouseSpeed, 2`n`n`n`n^f1::
 
 ~LButton::
     CoordMode, Mouse, Window
     MouseGetPos, xpos, ypos 
-    CoordMode, Caret, Window
-    ;clipboard = {coord}%xpos%,%ypos%
-    clipboard = %clipboard%`n`tMouseClick,left,%xpos%,%ypos%`n`tSleep, #*20*#
+    ;CoordMode, Caret, Window
+    clipboard = %clipboard%`n`tMouseClick,left,%xpos%,%ypos%`n`tSleep, 20
 return
 
 ~RButton::
     CoordMode, Mouse, Window
     MouseGetPos, xpos, ypos 
-    CoordMode, Caret, Window
-    ;clipboard = {rcoord}%xpos%,%ypos%
-    clipboard = %clipboard%`n`tMouseClick,right,%xpos%,%ypos%`n`tSleep, #*20*#
+    ;CoordMode, Caret, Window
+    clipboard = %clipboard%`n`tMouseClick,right,%xpos%,%ypos%`n`tSleep, 20
 return
 
 ^enter::
@@ -23,6 +21,11 @@ return
     clipboard = %clipboard%`n
     clipboard = %clipboard%`n^enter::
     clipboard = %clipboard%`n`tExitApp
+    clipboard = %clipboard%`nreturn
+    
+    clipboard = %clipboard%`n
+    clipboard = %clipboard%`n!enter::
+    clipboard = %clipboard%`n`tRun %A_ScriptDir%\%A_ScriptName%
     clipboard = %clipboard%`nreturn
     
     fn = %A_ScriptDir%\ahkTemp.ahk
